@@ -56,7 +56,7 @@ if st.session_state.page == "🎉 RSVP":
     </p>
     <h5>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h5>
     <h5>🎭 <strong>Dress Code:</strong> Lords in <strong>kilts</strong> or suits, Ladies in regal attire</h5>
-    <h5>💰 <strong>Contribution:</strong> £35 toward the feast, if you can ❤️</h5>
+    <h5>💰 <strong>Contribution:</strong> £35 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</h5>
     </div>
     """, unsafe_allow_html=True)
 
