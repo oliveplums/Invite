@@ -28,9 +28,8 @@ if "full_name" not in st.session_state:
 if "page" not in st.session_state:
     st.session_state.page = "🎉 RSVP"
 
-# Replace sidebar with top navigation (mobile friendly)
-page = st.sidebar.radio("Navigate to:", ["🎉 RSVP", "💳 Payment"],
-                    index=["🎉 RSVP", "💳 Payment"].index(st.session_state.page))
+# Add a new page option
+page = st.sidebar.radio("Navigate to:", ["🎉 RSVP", "💳 Payment", "🔐 Host View"], index=["🎉 RSVP", "💳 Payment", "🔐 Host View"].index(st.session_state.page) if st.session_state.page in ["🎉 RSVP", "💳 Payment", "🔐 Host View"] else 0)
 st.session_state.page = page
 
 # ---------- Page 1: RSVP ----------
@@ -150,9 +149,6 @@ elif st.session_state.page == "💳 Payment":
 if "admin_access" not in st.session_state:
     st.session_state.admin_access = False
 
-# Add a new page option
-page = st.sidebar.radio("Navigate to:", ["🎉 RSVP", "💳 Payment", "🔐 Host View"], index=["🎉 RSVP", "💳 Payment", "🔐 Host View"].index(st.session_state.page) if st.session_state.page in ["🎉 RSVP", "💳 Payment", "🔐 Host View"] else 0)
-st.session_state.page = page
 
 # ---------- Page 3: Host View ----------
 if st.session_state.page == "🔐 Host View":
