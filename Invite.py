@@ -47,7 +47,7 @@ if st.session_state.page == "🎉 RSVP":
     <h3 style="text-align:center;color:#7a3e2e">👑 You are invited! 👑</h3>
     <h4 style="text-align:center;color:#5e2b1c"><strong>🏰 Lumley Castle</strong></h4>
     <p style="text-align:center">
-    <a href="https://www.google.com/maps/place/Lumley+Castle/" target="_blank">📍 Chester-le-Street, County Durham</a>
+    <a href="https://maps.app.goo.gl/fHniNcdz89FpQsus5" target="_blank">📍 Chester-le-Street, County Durham</a>
     </p>
     <h5 style="font-weight: normal;">🗓️ <span style="font-weight: bold;">Date:</span> Saturday, 17th January 2026</h5>
     <h5 style="font-weight: normal;">🎭 <span style="font-weight: bold;">Dress Code:</span> Lords in <span style="font-weight: bold;">kilts</span> or suits, Ladies in regal attire</h5>
