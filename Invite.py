@@ -53,7 +53,7 @@ if st.session_state.page == "🎉 RSVP":
     <h3 style="text-align:center;">👑 You are invited! 👑</h3>
     <h4 style="text-align:center;"><strong>🏰 Lumley Castle</strong></h4>
     <p style="text-align:center">
-    <a href="https://www.lumleycastle.com/" target="_blank">📍 Chester-le-Street, County Durham</a>
+    <a href="https://maps.app.goo.gl/KmAgLYoyM88FNqFR8" target="_blank">📍 Chester-le-Street, County Durham</a>
     </p>
     <h5>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h5>
     <h5>🎭 <strong>Dress Code:</strong> Lords in <strong>kilts</strong> or suits, Ladies in regal attire</h5>
@@ -144,3 +144,29 @@ elif st.session_state.page == "💳 Payment":
             rsvps.to_csv("rsvp_data.csv", index=False)
             st.balloons()
             st.success("🎉 Thanks! Payment confirmed. 👑✨")
+
+
+# Add "Admin" page for viewing RSVPs
+if "admin_access" not in st.session_state:
+    st.session_state.admin_access = False
+
+# Add a new page option
+page = st.sidebar.radio("Navigate to:", ["🎉 RSVP", "💳 Payment", "🔐 Host View"], index=["🎉 RSVP", "💳 Payment", "🔐 Host View"].index(st.session_state.page) if st.session_state.page in ["🎉 RSVP", "💳 Payment", "🔐 Host View"] else 0)
+st.session_state.page = page
+
+# ---------- Page 3: Host View ----------
+if st.session_state.page == "🔐 Host View":
+    st.header("👑 Host RSVP Dashboard")
+
+    if not st.session_state.admin_access:
+        password = st.text_input("Enter host password:", type="password")
+        if password == "YourSecretPasswordHere":
+            st.session_state.admin_access = True
+            st.success("Access granted.")
+        else:
+            st.warning("Enter the correct password to access the dashboard.")
+    else:
+        st.dataframe(rsvps)
+        csv = rsvps.to_csv(index=False).encode("utf-8")
+        st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
