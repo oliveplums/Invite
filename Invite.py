@@ -2,152 +2,139 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-st.set_page_config(page_title="Olivia's 30th RSVP", page_icon="🏰")
+st.set_page_config(
+    page_title="Olivia's 30th RSVP",
+    page_icon="🎭",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
 
-# Load existing responses
+# Load or initialize the RSVP data
 try:
     rsvps = pd.read_csv("rsvp_data.csv")
 except FileNotFoundError:
     rsvps = pd.DataFrame(columns=[
-        "Name", "Attending", "Contribution", "Diet", "Allergies", "Notes", "Timestamp"
+        "Name", "Attending", "Contribution", "Diet", "Allergies", "Notes", "Timestamp", "Paid"
     ])
 
-tab1, tab2 = st.tabs(["🎟️ RSVP & Meal Preferences", "🔍 View RSVPs"])
+# Session state defaults
+if "show_payment" not in st.session_state:
+    st.session_state.show_payment = False
+if "payment_done" not in st.session_state:
+    st.session_state.payment_done = False
+if "full_name" not in st.session_state:
+    st.session_state.full_name = ""
+if "page" not in st.session_state:
+    st.session_state.page = "🎉 RSVP"
 
-# ---------- TAB 1: RSVP + Meal Preferences ----------
-with tab1:
-    st.markdown("<h1 style='text-align: center;'>✨ Olivia's 30th Birthday ✨</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center;'>Elibathian Banquet and Ceilidh at Lumley Castle</h3>", unsafe_allow_html=True)
-    
+# Replace sidebar with top navigation (mobile friendly)
+page = st.sidebar.radio("Navigate to:", ["🎉 RSVP", "💳 Payment"],
+                    index=["🎉 RSVP", "💳 Payment"].index(st.session_state.page))
+st.session_state.page = page
+
+# ---------- Page 1: RSVP ----------
+if st.session_state.page == "🎉 RSVP":
+    st.markdown("<h2 style='text-align: center;'>✨ Olivia's 30th Birthday ✨</h2>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>Elibathian Banquet and Ceilidh at Lumley Castle</h4>", unsafe_allow_html=True)
+
     st.image(
-        "https://eu-assets.simpleview-europe.com/durham2016/imageresizer/?image=%2Fdmsimgs%2F14_2094221340.jpg&action=Open_Graph_img" 
-        )
-        
+        "https://eu-assets.simpleview-europe.com/durham2016/imageresizer/?image=%2Fdmsimgs%2F14_2094221340.jpg&action=Open_Graph_img",
+        use_container_width=True
+    )
+
     st.markdown("""
-    <div style="background-color:#f9f4f1;padding:1.5rem;border-radius:1rem;border:1px solid #e0dede">
-
-    <h2 style="text-align:center;color:#7a3e2e">👑 You are invited! 👑</h2>
-
-    <p style="font-size:1.1rem;">
-    Join me for a magical celebration of my <strong>30th birthday</strong> at the unforgettable
-    <strong>Elibathian Banquet</strong> hosted at the magnificent:
+    <div style="background-color:#f9f4f1;padding:1rem;border-radius:0.75rem;border:1px solid #e0dede">
+    <h3 style="text-align:center;color:#7a3e2e">👑 You are invited! 👑</h3>
+    <h4 style="text-align:center;color:#5e2b1c"><strong>🏰 Lumley Castle</strong></h4>
+    <p style="text-align:center">
+    <a href="https://www.google.com/maps/place/Lumley+Castle/" target="_blank">📍 Chester-le-Street, County Durham</a>
     </p>
-
-    <h3 style="text-align:center;color:#5e2b1c"><strong>🏰 Lumley Castle</strong></h3>
-    <p style="text-align:center;margin-bottom:1rem;">
-    <a href="https://www.google.com/maps/place/Lumley+Castle/@54.8533258,-1.5558391,17z/data=!4m9!3m8!1s0x487e7caad2d7ed1d:0x1d04593a95f1554b!5m2!4m1!1i2!8m2!3d54.8533258!4d-1.5532642!16zL20vMDRkcXBw?entry=ttu&g_ep=EgoyMDI1MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍 Chester-le-Street, County Durham</a>
-    </p>
-
-    <hr style="margin-top:1.5rem; margin-bottom:1rem;">
-
-    <h4 style="margin-bottom:0.3rem;">📅 <strong>Date:</strong></h4>
-    <p style="font-size:1.1rem; margin-top:0;">Saturday, 17th January 2026</p>
-
-    <h4 style="margin-bottom:0.3rem;">🎭 <strong>Dress Code:</strong></h4>
-    <p style="font-size:1.1rem; margin-top:0;">Lords: <strong>Kilts</strong> if possible (or suit if not)
-    <br>Ladies: Regal Attire</p>
-
-    <h4 style="margin-bottom:0.3rem;">💰 <strong>Contribution:</strong></h4>
-    <p style="font-size:1.1rem; margin-top:0;">
-    If you're able to, a <strong>£32 contribution</strong> toward the food would be greatly appreciated ❤️  
-    <br>I’ll gladly cover the rest.
-    </p>
-
-    </div>
+    <h5 style="font-weight: normal;">🗓️ <span style="font-weight: bold;">Date:</span> Saturday, 17th January 2026</h5>
+    <h5 style="font-weight: normal;">🎭 <span style="font-weight: bold;">Dress Code:</span> Lords in <span style="font-weight: bold;">kilts</span> or suits, Ladies in regal attire</h5>
+    <h5 style="font-weight: normal;">💰 <span style="font-weight: bold;">Contribution:</span> £35 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</h5>
+        </div>
     """, unsafe_allow_html=True)
 
+    st.markdown("### 🍷 What's included:")
+    st.markdown("""
+    - Bagpipe courtyard arrival  
+    - Lords & Ladies entertainment  
+    - Five-course banquet  
+    - Red wine & mead  
+    - **Ceilidh dancing**  
+    """)
 
-
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("### 🍷 Your evening includes:")
-        st.markdown("""
-        - Bagpipe arrival in the inner courtyard  
-        - Entertainment by Lords & Ladies of the Court  
-        - Five-course banquet  
-        - A glass of red wine  
-        - A glass of mead  
-        - **Ceilidh dancing**   
-        """)
-
-    with col2:
-        st.markdown("### 🕖 Evening Timings:")
-        st.markdown("""
-        - Bar opens: **6:00pm**  
-        - Entertainment begins: **7:30pm**  
-        - Entertainment ends: **~10:00pm**  
-        - **Ceilidh starts:** **10:30pm**  
-        - Bar closes: **12:30am**  
-        - Ends: **1:00am**  
-        """)
+    st.markdown("### 🕐 Timings:")
+    st.markdown("""
+    - Bar opens: **6:00pm**  
+    - Show begins: **7:30pm**  
+    - Ceilidh: **10:30pm**  
+    - Carriages: **1:00am**  
+    """)
 
     st.markdown("---")
 
-with st.form("rsvp_form"):
-    # Collect existing names to allow selection
-    existing_names = sorted(rsvps["Name"].dropna().unique())
-
-    # Step 1: Session state init
-    if "name_input" not in st.session_state:
-        st.session_state.name_input = ""
-    if "prev_selection" not in st.session_state:
-        st.session_state.prev_selection = ""
-
-    # Step 2: Selectbox for existing names
-    name_selection = st.selectbox(
-        "Select your name (or choose to enter a new one)",
-        options=[""] + existing_names,
-        index=0,
-        key="name_selectbox"
-    )
-
-    # Step 4: Continue form if name entered
-    if name_selection.strip():
-    # Step 3: Sync text input with dropdown
-        if name_selection and name_selection != st.session_state.prev_selection:
-            st.session_state.name_input = name_selection
-            st.session_state.prev_selection = name_selection
-
-        name = st.text_input("Edit your name if needed", value=st.session_state.name_input, key="name_input_box")
-
+    with st.form("rsvp_form"):
+        first_name = st.text_input("First name")
+        last_name = st.text_input("Last name")
 
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
-        contribution = st.radio(
-            "Will you be able to contribute £32 toward your meal?",
-            ["Yes", "No", "Not sure yet"]
-        )
+        contribution = st.radio("Can you contribute £32?", ["Yes", "No", "Not sure yet"])
         diet = st.selectbox("Dietary preference", ["No preference", "Vegan", "Vegetarian", "Pescatarian"])
         allergies = st.text_area("Any allergies or intolerances?")
         notes = st.text_area("Other notes or special requests")
 
-    submitted = st.form_submit_button("Fill In RSVP")
+        submitted = st.form_submit_button("Submit RSVP")
 
-    if submitted:
-        if not name.strip():
-            st.error("Please enter your name before submitting.")
-        else:
-            # Step 5: Remove original name (if changed)
-            if name_selection and name.strip().lower() != name_selection.strip().lower():
-                rsvps = rsvps[rsvps["Name"].str.lower() != name_selection.strip().lower()]
+        if submitted:
+            if not first_name.strip() or not last_name.strip():
+                st.error("Please enter both your first and last name.")
             else:
-                rsvps = rsvps[rsvps["Name"].str.lower() != name.strip().lower()]
+                full_name = f"{first_name.strip()} {last_name.strip()}"
+                st.session_state.full_name = full_name
 
-            new_entry = {
-                "Name": name.strip(),
-                "Attending": attending,
-                "Contribution": contribution,
-                "Diet": diet,
-                "Allergies": allergies,
-                "Notes": notes,
-                "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            }
+                rsvps = rsvps[~rsvps["Name"].str.strip().str.lower().eq(full_name.strip().lower())]
 
-            rsvps = pd.concat([rsvps, pd.DataFrame([new_entry])], ignore_index=True)
+                new_entry = {
+                    "Name": full_name,
+                    "Attending": attending,
+                    "Contribution": contribution,
+                    "Diet": diet,
+                    "Allergies": allergies,
+                    "Notes": notes,
+                    "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "Paid": "No"
+                }
+                rsvps = pd.concat([rsvps, pd.DataFrame([new_entry])], ignore_index=True)
+                rsvps.to_csv("rsvp_data.csv", index=False)
+
+                if attending == "Yes" and contribution == "Yes":
+                    st.success("Thanks! You're being redirected to the payment page...")
+                    st.session_state.show_payment = True
+                    st.session_state.payment_done = False
+                    st.session_state.page = "💳 Payment"
+                    st.rerun()
+                else:
+                    st.success("Thanks! Your RSVP has been recorded.")
+
+# ---------- Page 2: Payment ----------
+elif st.session_state.page == "💳 Payment":
+    if not st.session_state.show_payment:
+        st.info("Please RSVP first before accessing the payment section.")
+    elif st.session_state.payment_done:
+        st.success("✅ Payment already confirmed. Thank you!")
+    else:
+        st.header("❤️Thank You So Much!❤️")
+        st.write("💳 Please pop your NAME in the payment notes!")
+
+        st.markdown("### 🎉 [Pay £35 via Link](https://revolut.me/olivia3tw?amount=32&currency=GBP) 🎉")
+        st.markdown("---")
+        st.write("After you've paid, let me know:")
+
+        if st.button("✅ I’ve Paid", use_container_width=True, key="payment_confirm"):
+            st.session_state.payment_done = True
+            name_lower = st.session_state.full_name.strip().lower()
+            rsvps.loc[rsvps["Name"].str.strip().str.lower() == name_lower, "Paid"] = "Yes"
             rsvps.to_csv("rsvp_data.csv", index=False)
-            st.success("Thank you! Your RSVP and preferences have been recorded.")
-
-with tab2:
-    st.header("🔍 RSVP List")
-    st.dataframe(rsvps[['Name', 'Attending', 'Diet', 'Allergies', 'Notes']])
+            st.balloons()
+            st.success("🎉 Thanks! Payment confirmed. 👑✨")
