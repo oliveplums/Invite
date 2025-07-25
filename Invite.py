@@ -56,7 +56,7 @@ if st.session_state.page == "🎉 RSVP":
     </p>
     <h5>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h5>
     <h5>🎭 <strong>Dress Code:</strong> Lairds in <strong>kilts</strong> or suits, Ladies in regal attire</h5>
-    <h5>💰 <strong>Contribution:</strong> £45 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</h5>
+    <h5>💰 <strong>Contribution:</strong> £37 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</h5>
     </div>
     """, unsafe_allow_html=True)
 
@@ -84,7 +84,7 @@ if st.session_state.page == "🎉 RSVP":
         last_name = st.text_input("Last name")
 
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
-        contribution = st.radio("Can you contribute £45?", ["Yes", "No", "Not sure yet"])
+        contribution = st.radio("Can you contribute £37?", ["Yes", "No", "Not sure yet"])
         diet = st.selectbox("Dietary preference", ["No preference", "Vegan", "Vegetarian", "Pescatarian"])
         allergies = st.text_area("Any allergies or intolerances?")
         notes = st.text_area("Other notes or special requests")
@@ -132,7 +132,7 @@ elif st.session_state.page == "💳 Payment":
         st.header("❤️Thank You So Much!❤️")
         st.write("💳 Please pop your NAME in the payment notes!")
 
-        st.markdown("### 🎉 [Pay £45 via Link](https://revolut.me/olivia3tw?amount=32&currency=GBP) 🎉")
+        st.markdown("### 🎉 [Pay £37 via Link](https://revolut.me/olivia3tw?amount=32&currency=GBP) 🎉")
         st.markdown("---")
         st.write("After you've paid, let me know:")
 
@@ -156,7 +156,7 @@ if st.session_state.page == "🔐 Host View":
 
     if not st.session_state.admin_access:
         password = st.text_input("Enter host password:", type="password")
-        if password == "abc12345":
+        if password == "abc12337":
             st.session_state.admin_access = True
             st.success("Access granted.")
         else:
