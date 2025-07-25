@@ -1,3 +1,4 @@
+#
 import streamlit as st
 import pandas as pd
 from datetime import datetime
@@ -43,16 +44,21 @@ if st.session_state.page == "🎉 RSVP":
     )
 
     st.markdown("""
-    <div style="background-color:#f9f4f1;padding:1rem;border-radius:0.75rem;border:1px solid #e0dede">
-    <h3 style="text-align:center;color:#7a3e2e">👑 You are invited! 👑</h3>
-    <h4 style="text-align:center;color:#5e2b1c"><strong>🏰 Lumley Castle</strong></h4>
+    <div style="
+        padding:1rem;
+        border-radius:0.75rem;
+        border:1px solid var(--secondary-background);
+        background-color:rgba(255,255,255,0.05)
+    ">
+    <h3 style="text-align:center;">👑 You are invited! 👑</h3>
+    <h4 style="text-align:center;"><strong>🏰 Lumley Castle</strong></h4>
     <p style="text-align:center">
-    <a href="https://maps.app.goo.gl/fHniNcdz89FpQsus5" target="_blank">📍 Chester-le-Street, County Durham</a>
+    <a href="https://www.lumleycastle.com/" target="_blank">📍 Chester-le-Street, County Durham</a>
     </p>
-    <h5 style="font-weight: normal;">🗓️ <span style="font-weight: bold;">Date:</span> Saturday, 17th January 2026</h5>
-    <h5 style="font-weight: normal;">🎭 <span style="font-weight: bold;">Dress Code:</span> Lords in <span style="font-weight: bold;">kilts</span> or suits, Ladies in regal attire</h5>
-    <h5 style="font-weight: normal;">💰 <span style="font-weight: bold;">Contribution:</span> £35 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</h5>
-        </div>
+    <h5>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h5>
+    <h5>🎭 <strong>Dress Code:</strong> Lords in <strong>kilts</strong> or suits, Ladies in regal attire</h5>
+    <h5>💰 <strong>Contribution:</strong> £35 toward the feast, if you can ❤️</h5>
+    </div>
     """, unsafe_allow_html=True)
 
     st.markdown("### 🍷 What's included:")
