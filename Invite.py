@@ -1,4 +1,4 @@
-#
+
 import streamlit as st
 import pandas as pd
 from datetime import datetime
@@ -9,13 +9,33 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
+st.markdown(
+    """
+    <style>
+    /* Use a sparkly gif as a full-page background */
+    body {
+        background-image: url("https://i.gifer.com/7CRL.gif");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
 
+    /* So content stays readable on top */
+    .stApp {
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 1rem;
+        border-radius: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # Load or initialize the RSVP data
 try:
     rsvps = pd.read_csv("rsvp_data.csv")
 except FileNotFoundError:
     rsvps = pd.DataFrame(columns=[
-        "Name", "Attending", "Contribution", "Drink", "First Course", "Second Course", "Third Course", "Fourth Course",
+        "Name", "Attending", "Contribution", "Main Meal",
         "Dessert", "Allergies", "Notes", "Timestamp", "Paid"
     ])
 
@@ -35,11 +55,12 @@ st.session_state.page = page
 
 # ---------- Page 1: RSVP ----------
 if st.session_state.page == "🎉 RSVP":
-    st.markdown("<h3 style='text-align: center;'>✨ Olivia's 30th Birthday ✨</h3>", unsafe_allow_html=True)
-    st.markdown("<h6 style='text-align: center;'>Elibathian Banquet and Ceilidh at Lumley Castle</h6>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>✨ Olivia's 30th ✨</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>The Most Important Party of the Year.</h3>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center;'>Dinner and Ceilidh at Brinkburn Brewery</h6>", unsafe_allow_html=True)
 
     st.image(
-        "https://eu-assets.simpleview-europe.com/durham2016/imageresizer/?image=%2Fdmsimgs%2F14_2094221340.jpg&action=Open_Graph_img",
+        "AIPIC.png",
         use_container_width=True
     )
 
@@ -51,9 +72,10 @@ if st.session_state.page == "🎉 RSVP":
         background-color:rgba(255,255,255,0.05)
     ">
       <h3 style="text-align:center;">👑 You are invited! 👑</h3>
-      <h4 style="text-align:center;"><strong>🏰 Lumley Castle</strong></h4>
+      <h5 style="text-align:center;">B THERE OR BE SQUARE</h5>
+      <h4 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
       <p style="text-align:center">
-        <a href="https://maps.app.goo.gl/KmAgLYoyM88FNqFR8" target="_blank">📍 Chester-le-Street, County Durham</a>
+        <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
       </p>
       <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
       <h6>🎭 <strong>Dress Code:</strong><br>
@@ -61,30 +83,21 @@ if st.session_state.page == "🎉 RSVP":
               Lairds: <strong>kilts</strong> or suits
           </span>
           <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
-              Ladies: Dresses, think stevie knicks, elf middle earth, knights tale, 
+              Ladies: Dresses, fancy 👠💃 bring spare shoes to dance if heels aren't the one
           </span>
       </h6>
-      <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£47 toward the feast, if you can ❤️ (Apologies The rest is covered by me!)</span></h6>
+      <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£30 toward the meal and celidh, if you can ❤️ (Apologies the rest will be covered by me!)</span></h6>
 </div>
     """, unsafe_allow_html=True)
 
 
-    st.markdown("### 🍷 What's included:")
-    st.markdown("""
-    - Bagpipe courtyard arrival  
-    - Lairds & Ladies entertainment  
-    - Five-course banquet  
-    - A Goblet of Red wine & A Goblet of Mead  
-    - **Ceilidh dancing**  
-    """)
-
     st.markdown("### 🕐 Timings:")
     st.markdown("""
-    - Arrival/Bar opens: **6:00pm**  
-    - Entertainment begins: **7:00pm**  
-    - Ceilidh: **10:30pm**  
-    - Bar Close: **00:30pm** 
-    - Carriages: **1:00am**  
+    - Arrival/Bar opens: **5:00pm**  
+    - Dinner begins: **6:00pm**  
+    - Ceilidh: **8:00pm**  
+    - Bar Close: **11:30pm** 
+    - Carriages: **00:00am**  
     """)
 
     st.markdown("---")
@@ -94,48 +107,28 @@ if st.session_state.page == "🎉 RSVP":
         last_name = st.text_input("Last name")
     
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
-        contribution = st.radio("Can you contribute £47?", ["Yes", "No", "Not sure yet"])
+        contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
     
-        drink = st.radio(
-            "Choose your drink option:",
-            ["A Goblet of Red Wine & A Goblet of Mead", "Non-alcoholic Alternative"]
-        )
+        st.markdown("### 🍽️ Meal")
+
+        # Meal description
+        st.markdown("""
+        **TRIMMINGS INCLUDE:** Mashed potato, roast skin-on small potatoes, braised red cabbage,  
+        pureed carrot and swede mash, Yorkshire pudding, seasonal vegetables, and gravy.
+        """)
+
     
-        st.markdown("### 🍽️ Banquet Menu")
-    
-        # 1st course
-        first_course = st.radio(
-            "1st Course (choose one):",
-            ["Homemade Vegetable Broth with Wholemeal Bread"]
-        )
-    
-        # 2nd course
-        second_course = st.radio(
-            "2nd Course (choose one):",
+        #  course
+        course = st.radio(
+            "Main Meal(choose one):",
             [
-                "Fish Pie with Creamed Potato Topped with Cheese",
-                "Butternut Squash Tart and Watercress",
-                "Vegan option (TBC)"
-            ]
-        )
-    
-        # 3rd course
-        third_course = st.radio(
-            "3rd Course (choose one):",
-            [
-                "Ribs Cooked in Red Wine Sauce with Herbs",
-                "Leek and Cheese Croquette with Mustard Mayonnaise",
-                "Vegan option (TBC)"
-            ]
-        )
-    
-        # 4th course
-        fourth_course = st.radio(
-            "4th Course (choose one):",
-            [
-                "Chicken Cooked in Mead Sauce with Jacket Potato Salad and Basil Butter",
-                "Wild Mushroom Wellington with Gratin Dauphinoise, Carrot and Green Bean Parcel with Vegetarian Gravy",
-                "Vegan option (TBC)"
+                "BEEF BRISKET: BRAISED IN OUR BYKER BROWN ALE",
+                "LAMB SHOULDER: BRAISED IN OUR HOMAGE TO MESOPOTAMIA SHIRAZ AND HONEY PORTER",
+                "PORK SHOULDER: BRAISED IN OUR GEORDIE PAGODA PALE ALE",
+                "BEER-BRINED CHICKEN BREAST:BRINDED IN OUR QUAYSIDE BLONDE CITRA ALE",
+                "VEGETARIAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY",
+                "VEGAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY"
+
             ]
         )
     
@@ -143,8 +136,8 @@ if st.session_state.page == "🎉 RSVP":
         dessert = st.radio(
             "Dessert:",
             [
-                "Apple and Pear Crumble with Vanilla Ice Cream",
-                "Vegan option (TBC)"
+                "Non-Vegan Option",
+                "Vegan Option"
             ]
         )
     
@@ -166,11 +159,7 @@ if st.session_state.page == "🎉 RSVP":
                     "Name": full_name,
                     "Attending": attending,
                     "Contribution": contribution,
-                    "Drink": drink,
-                    "First Course": first_course,
-                    "Second Course": second_course,
-                    "Third Course": third_course,
-                    "Fourth Course": fourth_course,
+                    "Main Meal": fourth_course,
                     "Dessert": dessert,
                     "Allergies": allergies,
                     "Notes": notes,
@@ -201,7 +190,7 @@ elif st.session_state.page == "💳 Payment":
 
         # Updated Monzo.me payment link
         monzo_user = "oliviapalombo"
-        amount = 47
+        amount = 30
         message = st.session_state.full_name.replace(" ", "+")  # optional to add in message
 
         monzo_link = f"https://monzo.me/{monzo_user}/{amount}?d={message}"
@@ -243,4 +232,3 @@ if st.session_state.page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
-
