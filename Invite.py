@@ -13,6 +13,21 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    div.stButton > button {
+        color: white !important;
+        background-color: #222222 !important;
+        border: 1px solid white !important;
+    }
+    div.stButton > button:hover {
+        background-color: #444444 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+st.markdown(
+    """
+    <style>
     /* Background and app container */
     body {
         background-image: url("https://i.gifer.com/7CRL.gif");
