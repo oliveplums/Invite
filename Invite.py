@@ -57,7 +57,11 @@ if "admin_access" not in st.session_state:
     st.session_state.admin_access = False
 
 # ---------- Navigation Sidebar ----------
-page = st.sidebar.radio("Navigate to:", ["🎉 RSVP", "💳 Payment", "🔐 Host View"], index=["🎉 RSVP", "💳 Payment", "🔐 Host View"].index(st.session_state.page) if st.session_state.page in ["🎉 RSVP", "💳 Payment", "🔐 Host View"] else 0)
+page = st.sidebar.radio(
+    "Navigate to:", 
+    ["🎉 RSVP", "💳 Payment", "🔐 Host View"], 
+    index=["🎉 RSVP", "💳 Payment", "🔐 Host View"].index(st.session_state.page) if st.session_state.page in ["🎉 RSVP", "💳 Payment", "🔐 Host View"] else 0
+)
 st.session_state.page = page
 
 # ---------- PAGE 1: RSVP ----------
@@ -72,7 +76,10 @@ if st.session_state.page == "🎉 RSVP":
     <div style="padding:1rem; border-radius:0.75rem; border:1px solid var(--secondary-background); background-color:rgba(255,255,255,0.05)">
       <h3 style="text-align:center;">👑 You are invited! 👑</h3>
       <h5 style="text-align:center;">B THERE OR BE SQUARE</h5>
-    #🎉 Countdown Timer
+    </div>
+    """, unsafe_allow_html=True)
+      
+    # 🎉 Countdown Timer
     event_date = datetime(2026, 1, 17, 17, 0, 0)  # 5:00pm
     now = datetime.now()
     countdown = event_date - now
@@ -89,23 +96,25 @@ if st.session_state.page == "🎉 RSVP":
         """, unsafe_allow_html=True)
     else:
         st.markdown("🎉 The party has started!")
-      <h4 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
-      <p style="text-align:center">
-        <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
-      </p>
-      <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
-      <h6>🎭 <strong>Dress Code:</strong><br>
-          <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
-              Lairds: <strong>kilts</strong> or suits
-          </span>
-          <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
-              Ladies: Dresses, fancy 👠💃 bring spare shoes to dance if heels aren't the one
-          </span>
-      </h6>
-      <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£30 toward the meal and ceilidh, if you can ❤️ (Apologies the rest will be covered by me!)</span></h6>
-    </div>
-    """, unsafe_allow_html=True)
 
+    st.markdown(
+        """
+        <h4 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
+        <p style="text-align:center">
+          <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
+        </p>
+        <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
+        <h6>🎭 <strong>Dress Code:</strong><br>
+            <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
+                Lairds: <strong>kilts</strong> or suits
+            </span>
+            <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
+                Ladies: Dresses, fancy 👠💃 bring spare shoes to dance if heels aren't the one
+            </span>
+        </h6>
+        <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£30 toward the meal and ceilidh, if you can ❤️ (Apologies the rest will be covered by me!)</span></h6>
+        """, unsafe_allow_html=True
+    )
 
     st.markdown("### 🕐 Timings:")
     st.markdown("""
@@ -155,6 +164,7 @@ if st.session_state.page == "🎉 RSVP":
                 full_name = f"{first_name.strip()} {last_name.strip()}"
                 st.session_state.full_name = full_name
 
+                # Remove previous entry with the same name if exists
                 rsvps = rsvps[~rsvps["Name"].str.strip().str.lower().eq(full_name.strip().lower())]
 
                 new_entry = {
@@ -177,7 +187,7 @@ if st.session_state.page == "🎉 RSVP":
                     st.session_state.show_payment = True
                     st.session_state.payment_done = False
                     st.session_state.page = "💳 Payment"
-                    st.rerun()
+                    st.experimental_rerun()
                 else:
                     st.success("Thanks! Your RSVP has been recorded.")
 
@@ -227,3 +237,4 @@ elif st.session_state.page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
