@@ -49,14 +49,14 @@ if st.session_state.page == "🎉 RSVP":
         border:1px solid var(--secondary-background);
         background-color:rgba(255,255,255,0.05)
     ">
-    <h3 style="text-align:center;">👑 You are invited! 👑</h3>
-    <h4 style="text-align:center;"><strong>🏰 Lumley Castle</strong></h4>
-    <p style="text-align:center">
-    <a href="https://maps.app.goo.gl/KmAgLYoyM88FNqFR8" target="_blank">📍 Chester-le-Street, County Durham</a>
-    </p>
-    <h5>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h5>
-    <h5>🎭 <strong>Dress Code:</strong> Lairds in <strong>kilts</strong> or suits, Ladies in regal attire</h5>
-    <h5>💰 <strong>Contribution:</strong> £37 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</h5>
+      <h3 style="text-align:center;">👑 You are invited! 👑</h3>
+      <h4 style="text-align:center;"><strong>🏰 Lumley Castle</strong></h4>
+      <p style="text-align:center">
+        <a href="https://maps.app.goo.gl/KmAgLYoyM88FNqFR8" target="_blank">📍 Chester-le-Street, County Durham</a>
+      </p>
+      <h5>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h5>
+      <h5>🎭 <strong>Dress Code:</strong> <span style="font-weight: normal;">Lairds in </span><strong>kilts</strong><span style="font-weight: normal;"> or suits, Ladies in regal attire</span></h5>
+      <h5>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£37 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</span></h5>
     </div>
     """, unsafe_allow_html=True)
 
