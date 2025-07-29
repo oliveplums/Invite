@@ -1,24 +1,6 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-st.markdown(
-    """
-    <style>
-    /* Specifically target the form submit button */
-    form div.stButton > button {
-        color: white !important;
-        background-color: #333 !important;
-        border: none !important;
-    }
-    form div.stButton > button:hover {
-        background-color: #555 !important;
-        color: white !important;
-        cursor: pointer;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 st.markdown(
     """
@@ -53,6 +35,24 @@ st.set_page_config(
     page_icon="🎭",
     layout="centered",
     initial_sidebar_state="collapsed"
+)
+st.markdown(
+    """
+    <style>
+    /* Specifically target the form submit button */
+    form div.stButton > button {
+        color: white !important;
+        background-color: #333 !important;
+        border: none !important;
+    }
+    form div.stButton > button:hover {
+        background-color: #555 !important;
+        color: white !important;
+        cursor: pointer;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
 # ---------- CSS STYLING ----------
