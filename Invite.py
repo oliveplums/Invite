@@ -109,10 +109,10 @@ if st.session_state.page == "🎉 RSVP":
                 Lairds: <strong>kilts</strong> or suits
             </span>
             <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
-                Ladies: Dresses, fancy 👠💃 bring spare shoes to dance if heels aren't the one
+                Ladies: Dresses, fancy 👠💃 bring spare shoes if heels aren't the one for dancing
             </span>
         </h6>
-        <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£30 toward the meal and ceilidh, if you can ❤️ (Apologies the rest will be covered by me!)</span></h6>
+        <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£30 toward the meal and ceilidh, if you can ❤️ (Thank you, Rest will be covered by me)</span></h6>
         """, unsafe_allow_html=True
     )
 
