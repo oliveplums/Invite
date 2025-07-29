@@ -57,7 +57,7 @@ if st.session_state.page == "🎉 RSVP":
       </p>
       <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
       <h6>🎭 <strong>Dress Code:</strong> <span style="font-weight: normal;">Lairds in </span><strong>kilts</strong><span style="font-weight: normal;"> or suits, Ladies in regal attire</span></h6>
-      <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£37 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</span></h6>
+      <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£50 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</span></h6>
     </div>
     """, unsafe_allow_html=True)
 
@@ -86,7 +86,7 @@ if st.session_state.page == "🎉 RSVP":
         last_name = st.text_input("Last name")
     
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
-        contribution = st.radio("Can you contribute £37?", ["Yes", "No", "Not sure yet"])
+        contribution = st.radio("Can you contribute £50?", ["Yes", "No", "Not sure yet"])
     
         drink = st.radio(
             "Choose your drink option:",
@@ -189,16 +189,16 @@ elif st.session_state.page == "💳 Payment":
         st.success("✅ Payment already confirmed. Thank you!")
     else:
         st.subheader("❤️Thank You So Much!❤️")
-        st.write("💳 Please pop your NAME in the payment notes!")
+        st.write("If you’re able to contribute to your ticket the support means the world to me!")
 
         # Updated Monzo.me payment link
         monzo_user = "oliviapalombo"
-        amount = 37
+        amount = 50
         message = st.session_state.full_name.replace(" ", "+")  # optional to add in message
 
         monzo_link = f"https://monzo.me/{monzo_user}/{amount}?d={message}"
 
-        st.markdown(f"### 🎉 [Pay £{amount} via Monzo.me]({monzo_link}) 🎉")
+        st.markdown(f"🎉 [Pay £{amount} via Monzo.me]({monzo_link}) 🎉")
         st.markdown("---")
         st.write("After you've paid, let me know:")
 
