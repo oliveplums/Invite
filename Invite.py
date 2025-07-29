@@ -4,6 +4,26 @@ from datetime import datetime
 st.markdown(
     """
     <style>
+    /* Make submit buttons have white text */
+    div.stButton > button {
+        color: white !important;
+        background-color: #333 !important;  /* optional: dark background */
+        border: none !important;
+    }
+
+    /* Optional: on hover, change button background for better UX */
+    div.stButton > button:hover {
+        background-color: #555 !important;
+        color: white !important;
+        cursor: pointer;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown(
+    """
+    <style>
     /* Force black text color on radio options and labels, including smaller descriptions */
     div[role="radiogroup"] label,
     .stRadio label,
@@ -28,26 +48,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.markdown(
-    """
-    <style>
-    /* Make submit buttons have white text */
-    div.stButton > button {
-        color: white !important;
-        background-color: #333 !important;  /* optional: dark background */
-        border: none !important;
-    }
 
-    /* Optional: on hover, change button background for better UX */
-    div.stButton > button:hover {
-        background-color: #555 !important;
-        color: white !important;
-        cursor: pointer;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 st.set_page_config(
     page_title="Olivia's 30th Birthday RSVP",
     page_icon="🎭",
