@@ -98,7 +98,7 @@ if st.session_state.page == "🎉 RSVP":
         # 1st course
         first_course = st.radio(
             "1st Course (choose one):",
-            ["Homemade Vegetable Broth with Wholemeal Bread", "Vegan option (TBC)"]
+            ["Homemade Vegetable Broth with Wholemeal Bread"]
         )
     
         # 2nd course
