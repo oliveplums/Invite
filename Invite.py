@@ -132,7 +132,14 @@ elif st.session_state.page == "💳 Payment":
         st.header("❤️Thank You So Much!❤️")
         st.write("💳 Please pop your NAME in the payment notes!")
 
-        st.markdown("### 🎉 [Pay £37 via Link](https://revolut.me/olivia3tw?amount=32&currency=GBP) 🎉")
+        # Updated Monzo.me payment link
+        monzo_user = "oliviapalombo"
+        amount = 37
+        message = st.session_state.full_name.replace(" ", "+")  # optional to add in message
+
+        monzo_link = f"https://monzo.me/{monzo_user}/{amount}?d={message}"
+
+        st.markdown(f"### 🎉 [Pay £{amount} via Monzo.me]({monzo_link}) 🎉")
         st.markdown("---")
         st.write("After you've paid, let me know:")
 
@@ -143,6 +150,7 @@ elif st.session_state.page == "💳 Payment":
             rsvps.to_csv("rsvp_data.csv", index=False)
             st.balloons()
             st.success("🎉 Thanks! Payment confirmed. 👑✨")
+
 
 
 # Add "Admin" page for viewing RSVPs
