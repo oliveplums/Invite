@@ -11,64 +11,64 @@ st.set_page_config(
 
 # ---------- CSS STYLING ----------
 
-st.markdown(
-    """
-    <style>
-    /* Force black text color on radio options and labels, including smaller descriptions */
-    div[role="radiogroup"] label,
-    .stRadio label,
-    .css-1o4mh9l, /* label inside radio groups */
-    .css-1nq57ik, /* possible radio description text */
-    .stTextInput label,
-    .stTextArea label {
-        color: black !important;
-    }
+# st.markdown(
+#     """
+#     <style>
+#     /* Force black text color on radio options and labels, including smaller descriptions */
+#     div[role="radiogroup"] label,
+#     .stRadio label,
+#     .css-1o4mh9l, /* label inside radio groups */
+#     .css-1nq57ik, /* possible radio description text */
+#     .stTextInput label,
+#     .stTextArea label {
+#         color: black !important;
+#     }
 
-    /* Also fix the smaller descriptive text under radio buttons */
-    div[role="radiogroup"] div[data-testid="stMarkdownContainer"] {
-        color: black !important;
-    }
+#     /* Also fix the smaller descriptive text under radio buttons */
+#     div[role="radiogroup"] div[data-testid="stMarkdownContainer"] {
+#         color: black !important;
+#     }
 
-    /* Fix for text under radio buttons wrapped in spans or divs */
-    div[role="radiogroup"] span,
-    div[role="radiogroup"] div {
-        color: black !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+#     /* Fix for text under radio buttons wrapped in spans or divs */
+#     div[role="radiogroup"] span,
+#     div[role="radiogroup"] div {
+#         color: black !important;
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
-st.markdown(
-    """
-    <style>
-    body {
-        background-image: url("https://i.gifer.com/7CRL.gif");
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-    }
+# st.markdown(
+#     """
+#     <style>
+#     body {
+#         background-image: url("https://i.gifer.com/7CRL.gif");
+#         background-size: cover;
+#         background-attachment: fixed;
+#         background-position: center;
+#     }
 
-    .stApp {
-        background-color: rgba(255, 255, 255, 0.85);
-        padding: 1rem;
-        border-radius: 10px;
-        color: black !important;
-    }
+#     .stApp {
+#         background-color: rgba(255, 255, 255, 0.85);
+#         padding: 1rem;
+#         border-radius: 10px;
+#         color: black !important;
+#     }
 
-    html, body, .stApp, label, .css-1d391kg, .css-1n76uvr, .css-1v3fvcr, .st-bb, .stRadio label, .stTextInput label, .stTextArea label {
-        color: black !important;
-    }
+#     html, body, .stApp, label, .css-1d391kg, .css-1n76uvr, .css-1v3fvcr, .st-bb, .stRadio label, .stTextInput label, .stTextArea label {
+#         color: black !important;
+#     }
 
-    /* Fix radio button options text color */
-    div[role="radiogroup"] label,
-    .stRadio label {
-        color: black !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+#     /* Fix radio button options text color */
+#     div[role="radiogroup"] label,
+#     .stRadio label {
+#         color: black !important;
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 # ---------- Load or Initialize Data ----------
 try:
