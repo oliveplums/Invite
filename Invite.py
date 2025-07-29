@@ -87,6 +87,26 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown(
+    """
+    <style>
+    /* Specifically target the form submit button */
+    form div.stButton > button {
+        color: white !important;
+        background-color: #333 !important;
+        border: none !important;
+    }
+    form div.stButton > button:hover {
+        background-color: #555 !important;
+        color: white !important;
+        cursor: pointer;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # ---------- Load or Initialize Data ----------
 try:
     rsvps = pd.read_csv("rsvp_data.csv")
