@@ -78,13 +78,16 @@ if st.session_state.page == "🎉 RSVP":
 
     st.markdown(
         """
-        <audio controls autoplay loop>
-          <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
-          Your browser does not support the audio element.
-        </audio>
+        <div style="text-align: center;">
+            <audio controls autoplay loop>
+              <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
+              Your browser does not support the audio element.
+            </audio>
+        </div>
         """,
         unsafe_allow_html=True
     )
+
 
       
     # 🎉 Countdown Timer
