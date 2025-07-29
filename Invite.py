@@ -63,6 +63,7 @@ if st.session_state.page == "🎉 RSVP":
               Ladies: regal attire
           </span>
       </h6>
+      <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£47 toward the feast, if you can ❤️ (Apologies The rest is covered by me!)</span></h6>
 </div>
     """, unsafe_allow_html=True)
 
