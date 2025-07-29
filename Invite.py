@@ -56,10 +56,14 @@ if st.session_state.page == "🎉 RSVP":
         <a href="https://maps.app.goo.gl/KmAgLYoyM88FNqFR8" target="_blank">📍 Chester-le-Street, County Durham</a>
       </p>
       <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
-      <h6>🎭 <strong>Dress Code:</strong> <span style="font-weight: normal;">Lairds in </span><strong>kilts</strong><span style="font-weight: normal;"> or suits, Ladies in regal attire</span></h6>
+      <h6>🎭 <strong>Dress Code:</strong><br>
+        <span style="font-weight: normal; padding-left: 1.5rem; display: block;">Lairds in <strong>kilts</strong></span>
+        <span style="font-weight: normal; display: block;">Ladies in regal attire</span>
+      </h6>
       <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£47 toward the feast, if you can ❤️ (Apologies The rest is covered by me!)</span></h6>
     </div>
     """, unsafe_allow_html=True)
+
 
     st.markdown("### 🍷 What's included:")
     st.markdown("""
