@@ -2,57 +2,11 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-st.markdown(
-    """
-    <style>
-    /* Force black text color on radio options and labels, including smaller descriptions */
-    div[role="radiogroup"] label,
-    .stRadio label,
-    .css-1o4mh9l, /* label inside radio groups */
-    .css-1nq57ik, /* possible radio description text */
-    .stTextInput label,
-    .stTextArea label {
-        color: black !important;
-    }
-
-    /* Also fix the smaller descriptive text under radio buttons */
-    div[role="radiogroup"] div[data-testid="stMarkdownContainer"] {
-        color: black !important;
-    }
-
-    /* Fix for text under radio buttons wrapped in spans or divs */
-    div[role="radiogroup"] span,
-    div[role="radiogroup"] div {
-        color: black !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 st.set_page_config(
     page_title="Olivia's 30th Birthday RSVP",
     page_icon="🎭",
     layout="centered",
     initial_sidebar_state="collapsed"
-)
-st.markdown(
-    """
-    <style>
-    /* Specifically target the form submit button */
-    form div.stButton > button {
-        color: white !important;
-        background-color: #333 !important;
-        border: none !important;
-    }
-    form div.stButton > button:hover {
-        background-color: #555 !important;
-        color: white !important;
-        cursor: pointer;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
 )
 
 # ---------- CSS STYLING ----------
@@ -73,29 +27,30 @@ st.markdown(
         color: black !important;
     }
 
+    /* Make all general text black */
     html, body, .stApp, label, .css-1d391kg, .css-1n76uvr, .css-1v3fvcr, .st-bb, .stRadio label, .stTextInput label, .stTextArea label {
         color: black !important;
     }
 
-    /* Fix radio button options text color */
-    div[role="radiogroup"] label,
-    .stRadio label {
+    /* Radio option labels text color */
+    div[role="radiogroup"] label, div[role="radiogroup"] span {
         color: black !important;
     }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
-st.markdown(
-    """
-    <style>
-    /* Specifically target the form submit button */
+    /* Text inside radio buttons */
+    .stRadio div > label, .stRadio div > div > label {
+        color: black !important;
+    }
+
+    /* Submit button styling inside forms */
     form div.stButton > button {
         color: white !important;
         background-color: #333 !important;
         border: none !important;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
     }
+
     form div.stButton > button:hover {
         background-color: #555 !important;
         color: white !important;
@@ -105,7 +60,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 # ---------- Load or Initialize Data ----------
 try:
@@ -309,5 +263,6 @@ elif st.session_state.page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
