@@ -222,7 +222,7 @@ if "admin_access" not in st.session_state:
 
 # ---------- Page 3: Host View ----------
 if st.session_state.page == "🔐 Host View":
-    st.header("👑 Host RSVP Dashboard")
+    st.subheader("👑 Host RSVP Dashboard")
 
     if not st.session_state.admin_access:
         password = st.text_input("Enter host password:", type="password")
