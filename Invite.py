@@ -164,7 +164,7 @@ if st.session_state.page == "🔐 Host View":
 
     if not st.session_state.admin_access:
         password = st.text_input("Enter host password:", type="password")
-        if password == "abc12337":
+        if password == "abc123":
             st.session_state.admin_access = True
             st.success("Access granted.")
         else:
