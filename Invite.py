@@ -55,6 +55,7 @@ if st.session_state.page == "🎉 RSVP":
       <p style="text-align:center">
         <a href="https://maps.app.goo.gl/KmAgLYoyM88FNqFR8" target="_blank">📍 Chester-le-Street, County Durham</a>
       </p>
+      <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
       <h6>🎭 <strong>Dress Code:</strong><br>
           <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
               Lairds: <strong>kilts</strong> or suits
