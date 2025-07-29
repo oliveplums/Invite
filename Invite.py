@@ -61,7 +61,7 @@ if st.session_state.page == "🎉 RSVP":
               Lairds: <strong>kilts</strong> or suits
           </span>
           <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
-              Ladies: regal attire
+              Ladies: Dresses, think stevie knicks, elf middle earth, knights tale, 
           </span>
       </h6>
       <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£47 toward the feast, if you can ❤️ (Apologies The rest is covered by me!)</span></h6>
