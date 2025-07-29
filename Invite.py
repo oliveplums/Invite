@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Olivia's 30th RSVP",
+    page_title="Olivia's 30th Birthday RSVP",
     page_icon="🎭",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -34,7 +34,7 @@ st.session_state.page = page
 
 # ---------- Page 1: RSVP ----------
 if st.session_state.page == "🎉 RSVP":
-    st.markdown("<h2 style='text-align: center;'>✨ Olivia's 30th Birthday ✨</h2>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>✨ Olivia's 30th Birthday ✨</h1>", unsafe_allow_html=True)
     st.markdown("<h4 style='text-align: center;'>Elibathian Banquet and Ceilidh at Lumley Castle</h4>", unsafe_allow_html=True)
 
     st.image(
@@ -65,7 +65,7 @@ if st.session_state.page == "🎉 RSVP":
     - Bagpipe courtyard arrival  
     - Lairds & Ladies entertainment  
     - Five-course banquet  
-    - Red wine & mead  
+    - A Glass of Red wine & A Glass of Mead  
     - **Ceilidh dancing**  
     """)
 
