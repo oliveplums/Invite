@@ -164,7 +164,6 @@ if st.session_state.page == "🎉 RSVP":
                     "Third Course": third_course,
                     "Fourth Course": fourth_course,
                     "Dessert": dessert,
-                    "Diet": diet,
                     "Allergies": allergies,
                     "Notes": notes,
                     "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
