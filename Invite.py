@@ -130,22 +130,30 @@ if st.session_state.page == "🎉 RSVP":
         contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
 
         st.markdown("### 🍽️ Meal")
+
+
         st.markdown("""
         **TRIMMINGS INCLUDE:** Mashed potato, roast skin-on small potatoes, braised red cabbage,  
         pureed carrot and swede mash, Yorkshire pudding, seasonal vegetables, and gravy.
         """)
-
+        
         course = st.radio(
             "Main Meal (choose one):",
             [
-                "BEEF BRISKET: BRAISED IN OUR BYKER BROWN ALE",
-                "LAMB SHOULDER: BRAISED IN OUR HOMAGE TO MESOPOTAMIA SHIRAZ AND HONEY PORTER",
-                "PORK SHOULDER: BRAISED IN OUR GEORDIE PAGODA PALE ALE",
-                "BEER-BRINED CHICKEN BREAST: BRINED IN OUR QUAYSIDE BLONDE CITRA ALE",
-                "VEGETARIAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY",
-                "VEGAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY"
+                "BEEF BRISKET: braised in our Byker Brown Ale",
+                "",
+                "LAMB SHOULDER: braised in our Homage to Mesopotamia Shiraz and Honey Porter",
+                "",
+                "PORK SHOULDER: braised in our Geordie Pagoda Pale Ale",
+                "",
+                "BEER-BRINED CHICKEN BREAST: brined in our Quayside Blonde Citra Ale",
+                "",
+                "VEGETARIAN NUT ROAST: match with our Cushty Cushy",
+                "",
+                "VEGAN NUT ROAST: match with our Cushty Cushy"
             ]
         )
+
 
         dessert = st.radio("Dessert:", ["Non-Vegan Option", "Vegan Option"])
         allergies = st.text_area("Any allergies or intolerances?")
