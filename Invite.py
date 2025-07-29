@@ -15,7 +15,8 @@ try:
     rsvps = pd.read_csv("rsvp_data.csv")
 except FileNotFoundError:
     rsvps = pd.DataFrame(columns=[
-        "Name", "Attending", "Contribution", "Diet", "Allergies", "Notes", "Timestamp", "Paid"
+        "Name", "Attending", "Contribution", "Drink", "First Course", "Second Course", "Third Course", "Fourth Course",
+        "Dessert", "Diet", "Allergies", "Notes", "Timestamp", "Paid"
     ])
 
 # Session state defaults
@@ -65,62 +66,117 @@ if st.session_state.page == "🎉 RSVP":
     - Bagpipe courtyard arrival  
     - Lairds & Ladies entertainment  
     - Five-course banquet  
-    - A Glass of Red wine & A Glass of Mead  
+    - A Goblet of Red wine & A Goblet of Mead  
     - **Ceilidh dancing**  
     """)
 
     st.markdown("### 🕐 Timings:")
     st.markdown("""
-    - Bar opens: **6:00pm**  
-    - Show begins: **7:30pm**  
+    - Arrival/Bar opens: **6:00pm**  
+    - Entertainment begins: **7:00pm**  
     - Ceilidh: **10:30pm**  
+    - Bar Close: **00:30pm** 
     - Carriages: **1:00am**  
     """)
 
     st.markdown("---")
 
     with st.form("rsvp_form"):
-        first_name = st.text_input("First name")
-        last_name = st.text_input("Last name")
+    first_name = st.text_input("First name")
+    last_name = st.text_input("Last name")
 
-        attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
-        contribution = st.radio("Can you contribute £37?", ["Yes", "No", "Not sure yet"])
-        diet = st.selectbox("Dietary preference", ["No preference", "Vegan", "Vegetarian", "Pescatarian"])
-        allergies = st.text_area("Any allergies or intolerances?")
-        notes = st.text_area("Other notes or special requests")
+    attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
+    contribution = st.radio("Can you contribute £37?", ["Yes", "No", "Not sure yet"])
 
-        submitted = st.form_submit_button("Submit RSVP")
+    # Drink selection: Wine & Mead or Non-alcoholic
+    drink = st.radio(
+        "Choose your drink option:",
+        ["A Goblet of Red Wine & A Goblet of Mead", "Non-alcoholic option"]
+    )
 
-        if submitted:
-            if not first_name.strip() or not last_name.strip():
-                st.error("Please enter both your first and last name.")
+    # Courses selections:
+    st.markdown("### 🍽️ Banquet Menu")
+
+    # 1st course
+    first_course = st.selectbox(
+        "1st Course (choose one):",
+        ["Homemade Vegetable Broth with Wholemeal Bread", "Vegan option (TBC)"]
+    )
+
+    # 2nd course
+    second_course = st.selectbox(
+        "2nd Course (choose one):",
+        ["Fish Pie with Creamed Potato Topped with Cheese",
+         "Butternut Squash Tart and Watercress",
+         "Vegan option (TBC)"]
+    )
+
+    # 3rd course
+    third_course = st.selectbox(
+        "3rd Course (choose one):",
+        ["Ribs Cooked in Red Wine Sauce with Herbs",
+         "Leek and Cheese Croquette with Mustard Mayonnaise",
+         "Vegan option (TBC)"]
+    )
+
+    # 4th course
+    fourth_course = st.selectbox(
+        "4th Course (choose one):",
+        ["Chicken Cooked in Mead Sauce with Jacket Potato Salad and Basil Butter",
+         "Wild Mushroom Wellington with Gratin Dauphinoise, Carrot and Green Bean Parcel with Vegetarian Gravy",
+         "Vegan option (TBC)"]
+    )
+
+    # Dessert
+    dessert = st.selectbox(
+        "Dessert:",
+        ["Apple and Pear Crumble with Vanilla Ice Cream",
+         "Vegan option (TBC)"]
+    )
+
+    allergies = st.text_area("Any allergies or intolerances?")
+    notes = st.text_area("Other notes or special requests")
+
+    submitted = st.form_submit_button("Submit RSVP")
+
+    if submitted:
+        # Same validation and saving logic as before, but now also save meal/drink choices
+        if not first_name.strip() or not last_name.strip():
+            st.error("Please enter both your first and last name.")
+        else:
+            full_name = f"{first_name.strip()} {last_name.strip()}"
+            st.session_state.full_name = full_name
+
+            rsvps = rsvps[~rsvps["Name"].str.strip().str.lower().eq(full_name.strip().lower())]
+
+            new_entry = {
+                "Name": full_name,
+                "Attending": attending,
+                "Contribution": contribution,
+                "Drink": drink,
+                "First Course": first_course,
+                "Second Course": second_course,
+                "Third Course": third_course,
+                "Fourth Course": fourth_course,
+                "Dessert": dessert,
+                "Diet": diet,
+                "Allergies": allergies,
+                "Notes": notes,
+                "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Paid": "No"
+            }
+            rsvps = pd.concat([rsvps, pd.DataFrame([new_entry])], ignore_index=True)
+            rsvps.to_csv("rsvp_data.csv", index=False)
+
+            if attending == "Yes" and contribution == "Yes":
+                st.success("Thanks! You're being redirected to the payment page...")
+                st.session_state.show_payment = True
+                st.session_state.payment_done = False
+                st.session_state.page = "💳 Payment"
+                st.rerun()
             else:
-                full_name = f"{first_name.strip()} {last_name.strip()}"
-                st.session_state.full_name = full_name
+                st.success("Thanks! Your RSVP has been recorded.")
 
-                rsvps = rsvps[~rsvps["Name"].str.strip().str.lower().eq(full_name.strip().lower())]
-
-                new_entry = {
-                    "Name": full_name,
-                    "Attending": attending,
-                    "Contribution": contribution,
-                    "Diet": diet,
-                    "Allergies": allergies,
-                    "Notes": notes,
-                    "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "Paid": "No"
-                }
-                rsvps = pd.concat([rsvps, pd.DataFrame([new_entry])], ignore_index=True)
-                rsvps.to_csv("rsvp_data.csv", index=False)
-
-                if attending == "Yes" and contribution == "Yes":
-                    st.success("Thanks! You're being redirected to the payment page...")
-                    st.session_state.show_payment = True
-                    st.session_state.payment_done = False
-                    st.session_state.page = "💳 Payment"
-                    st.rerun()
-                else:
-                    st.success("Thanks! Your RSVP has been recorded.")
 
 # ---------- Page 2: Payment ----------
 elif st.session_state.page == "💳 Payment":
