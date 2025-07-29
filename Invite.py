@@ -30,6 +30,12 @@ st.markdown(
     html, body, .stApp, label, .css-1d391kg, .css-1n76uvr, .css-1v3fvcr, .st-bb, .stRadio label, .stTextInput label, .stTextArea label {
         color: black !important;
     }
+
+    /* Fix radio button options text color */
+    div[role="radiogroup"] label,
+    .stRadio label {
+        color: black !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -237,4 +243,5 @@ elif st.session_state.page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
