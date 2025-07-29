@@ -234,8 +234,6 @@ elif st.session_state.page == "💳 Payment":
         st.success("✅ Payment already confirmed. Thank you!")
     else:
         st.subheader("❤️ Thank You So Much! ❤️")
-        st.write("If you’re able to contribute to your ticket the support means the world to me!")
-
         monzo_user = "oliviapalombo"
         amount = 30
         message = st.session_state.full_name.replace(" ", "+")
