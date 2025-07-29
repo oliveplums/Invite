@@ -69,6 +69,27 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+st.markdown(
+    """
+    <style>
+    /* Make all buttons have white text (especially in dark mode) */
+    div.stButton > button {
+        color: white !important;
+        background-color: #333333 !important;  /* dark background for contrast */
+        border: 1px solid white !important;
+    }
+    div.stButton > button:hover {
+        background-color: #555555 !important;
+        color: white !important;
+    }
+    div.stButton > button:focus {
+        outline: 2px solid white !important;
+        color: white !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # ---------- Load or Initialize Data ----------
 try:
