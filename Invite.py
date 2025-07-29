@@ -76,31 +76,17 @@ if st.session_state.page == "🎉 RSVP":
     </div>
     """, unsafe_allow_html=True)
 
-    # st.markdown(
-    #     """
-    #     <div style="text-align: center;">
-    #         <audio controls autoplay loop>
-    #           <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
-    #           Your browser does not support the audio element.
-    #         </audio>
-    #     </div>
-    #     """,
-    #     unsafe_allow_html=True
-    # )
-
-    
     st.markdown(
         """
         <div style="text-align: center;">
             <audio controls autoplay loop>
-              <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Yung_Kartel/Celtic_Trap/Yung_Kartel_-_01_-_Celtic_Trap.mp3" type="audio/mp3">
+              <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
               Your browser does not support the audio element.
             </audio>
         </div>
         """,
         unsafe_allow_html=True
     )
-
 
 
       
