@@ -72,6 +72,23 @@ if st.session_state.page == "🎉 RSVP":
     <div style="padding:1rem; border-radius:0.75rem; border:1px solid var(--secondary-background); background-color:rgba(255,255,255,0.05)">
       <h3 style="text-align:center;">👑 You are invited! 👑</h3>
       <h5 style="text-align:center;">B THERE OR BE SQUARE</h5>
+    #🎉 Countdown Timer
+    event_date = datetime(2026, 1, 17, 17, 0, 0)  # 5:00pm
+    now = datetime.now()
+    countdown = event_date - now
+
+    if countdown.total_seconds() > 0:
+        days = countdown.days
+        hours, remainder = divmod(countdown.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        st.markdown(f"""
+        <div style="text-align: center; font-size: 1.5rem; padding: 1rem; background-color: #fffbe6; border-radius: 10px; margin-bottom: 1rem;">
+            ⏳ <strong>Countdown to Party:</strong><br>
+            <span style="font-size: 2rem;">{days}d {hours}h {minutes}m {seconds}s</span>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("🎉 The party has started!")
       <h4 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
       <p style="text-align:center">
         <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
@@ -89,23 +106,6 @@ if st.session_state.page == "🎉 RSVP":
     </div>
     """, unsafe_allow_html=True)
 
-    # 🎉 Countdown Timer
-    event_date = datetime(2026, 1, 17, 17, 0, 0)  # 5:00pm
-    now = datetime.now()
-    countdown = event_date - now
-
-    if countdown.total_seconds() > 0:
-        days = countdown.days
-        hours, remainder = divmod(countdown.seconds, 3600)
-        minutes, seconds = divmod(remainder, 60)
-        st.markdown(f"""
-        <div style="text-align: center; font-size: 1.5rem; padding: 1rem; background-color: #fffbe6; border-radius: 10px; margin-bottom: 1rem;">
-            ⏳ <strong>Countdown to Party:</strong><br>
-            <span style="font-size: 2rem;">{days}d {hours}h {minutes}m {seconds}s</span>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown("🎉 The party has started!")
 
     st.markdown("### 🕐 Timings:")
     st.markdown("""
