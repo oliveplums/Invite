@@ -61,6 +61,17 @@ page = st.sidebar.radio(
 st.session_state.page = page
 
 # ---------- PAGE 1: RSVP ----------
+st.markdown(
+    """
+    <audio controls autoplay loop>
+      <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    """,
+    unsafe_allow_html=True
+)
+
+
 if st.session_state.page == "🎉 RSVP":
     st.markdown("<h3 style='text-align: center;'>✨ Olivia's 30th ✨</h3>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>The Most Important Party of the Year.</h3>", unsafe_allow_html=True)
