@@ -188,7 +188,7 @@ elif st.session_state.page == "💳 Payment":
     elif st.session_state.payment_done:
         st.success("✅ Payment already confirmed. Thank you!")
     else:
-        st.header("❤️Thank You So Much!❤️")
+        st.subheader("❤️Thank You So Much!❤️")
         st.write("💳 Please pop your NAME in the payment notes!")
 
         # Updated Monzo.me payment link
