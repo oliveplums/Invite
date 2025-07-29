@@ -16,7 +16,7 @@ try:
 except FileNotFoundError:
     rsvps = pd.DataFrame(columns=[
         "Name", "Attending", "Contribution", "Drink", "First Course", "Second Course", "Third Course", "Fourth Course",
-        "Dessert", "Diet", "Allergies", "Notes", "Timestamp", "Paid"
+        "Dessert", "Allergies", "Notes", "Timestamp", "Paid"
     ])
 
 # Session state defaults
