@@ -35,7 +35,7 @@ st.session_state.page = page
 # ---------- Page 1: RSVP ----------
 if st.session_state.page == "🎉 RSVP":
     st.markdown("<h3 style='text-align: center;'>✨ Olivia's 30th Birthday ✨</h3>", unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center;'>Elibathian Banquet and Ceilidh at Lumley Castle</h4>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center;'>Elibathian Banquet and Ceilidh at Lumley Castle</h6>", unsafe_allow_html=True)
 
     st.image(
         "https://eu-assets.simpleview-europe.com/durham2016/imageresizer/?image=%2Fdmsimgs%2F14_2094221340.jpg&action=Open_Graph_img",
