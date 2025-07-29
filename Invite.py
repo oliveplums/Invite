@@ -9,6 +9,67 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# ---------- CSS STYLING ----------
+
+st.markdown(
+    """
+    <style>
+    /* Force black text color on radio options and labels, including smaller descriptions */
+    div[role="radiogroup"] label,
+    .stRadio label,
+    .css-1o4mh9l, /* label inside radio groups */
+    .css-1nq57ik, /* possible radio description text */
+    .stTextInput label,
+    .stTextArea label {
+        color: black !important;
+    }
+
+    /* Also fix the smaller descriptive text under radio buttons */
+    div[role="radiogroup"] div[data-testid="stMarkdownContainer"] {
+        color: black !important;
+    }
+
+    /* Fix for text under radio buttons wrapped in spans or divs */
+    div[role="radiogroup"] span,
+    div[role="radiogroup"] div {
+        color: black !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <style>
+    body {
+        background-image: url("https://i.gifer.com/7CRL.gif");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    .stApp {
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 1rem;
+        border-radius: 10px;
+        color: black !important;
+    }
+
+    html, body, .stApp, label, .css-1d391kg, .css-1n76uvr, .css-1v3fvcr, .st-bb, .stRadio label, .stTextInput label, .stTextArea label {
+        color: black !important;
+    }
+
+    /* Fix radio button options text color */
+    div[role="radiogroup"] label,
+    .stRadio label {
+        color: black !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # ---------- Load or Initialize Data ----------
 try:
     rsvps = pd.read_csv("rsvp_data.csv")
@@ -47,12 +108,12 @@ if st.session_state.page == "🎉 RSVP":
     st.image("AIPIC.png", use_container_width=True)
 
     st.markdown("""
-    <div style="padding:1rem; border-radius:0.75rem; border:1px solid #ccc; background-color:#f9f9f9">
+    <div style="padding:1rem; border-radius:0.75rem; border:1px solid var(--secondary-background); background-color:rgba(255,255,255,0.05)">
       <h3 style="text-align:center;">👑 You are invited! 👑</h3>
       <h5 style="text-align:center;">B THERE OR BE SQUARE</h5>
     </div>
     """, unsafe_allow_html=True)
-
+      
     # 🎉 Countdown Timer
     event_date = datetime(2026, 1, 17, 17, 0, 0)  # 5:00pm
     now = datetime.now()
@@ -71,24 +132,32 @@ if st.session_state.page == "🎉 RSVP":
     else:
         st.markdown("🎉 The party has started!")
 
+    st.markdown(
+        """
+        <h4 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
+        <p style="text-align:center">
+          <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
+        </p>
+        <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
+        <h6>🎭 <strong>Dress Code:</strong><br>
+            <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
+                Lairds: <strong>kilts</strong> or suits
+            </span>
+            <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
+                Ladies: Dresses, fancy 👠💃 bring spare shoes if heels aren't the one for dancing
+            </span>
+        </h6>
+        <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£30 toward the meal and ceilidh, if you can ❤️ (Thank you, Rest will be covered by me)</span></h6>
+        """, unsafe_allow_html=True
+    )
+
+    st.markdown("### 🕐 Timings:")
     st.markdown("""
-    ### 🗓️ Date & Location
-    **Brinkburn Brewery**  
-    📍 [Ouseburn, Newcastle](https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9)  
-    
-    **🗓️ Date:** Saturday, 17th January 2026  
-    **🎭 Dress Code:**  
-    • Lairds: Kilts or suits  
-    • Ladies: Dresses, fancy 👠💃 bring spare shoes if heels aren't the one for dancing  
-    
-    **💰 Contribution:** £30 toward the meal and ceilidh (if you can ❤️)  
-    
-    ### 🕒 Timings
-    • Arrival/Bar opens: **5:00pm**  
-    • Dinner begins: **6:00pm**  
-    • Ceilidh: **8:00pm**  
-    • Bar Close: **11:30pm**  
-    • Kicking Out: **00:00am**  
+    - Arrival/Bar opens: **5:00pm**  
+    - Dinner begins: **6:00pm**  
+    - Ceilidh: **8:00pm**  
+    - Bar Close: **11:30pm** 
+    - Kicking Out: **00:00am**  
     """)
 
     st.markdown("---")
@@ -105,14 +174,17 @@ if st.session_state.page == "🎉 RSVP":
         pureed carrot and swede mash, Yorkshire pudding, seasonal vegetables, and gravy.
         """)
 
-        course = st.radio("Main Meal (choose one):", [
-            "BEEF BRISKET: BRAISED IN OUR BYKER BROWN ALE",
-            "LAMB SHOULDER: BRAISED IN OUR HOMAGE TO MESOPOTAMIA SHIRAZ AND HONEY PORTER",
-            "PORK SHOULDER: BRAISED IN OUR GEORDIE PAGODA PALE ALE",
-            "BEER-BRINED CHICKEN BREAST: BRINED IN OUR QUAYSIDE BLONDE CITRA ALE",
-            "VEGETARIAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY",
-            "VEGAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY"
-        ])
+        course = st.radio(
+            "Main Meal (choose one):",
+            [
+                "BEEF BRISKET: BRAISED IN OUR BYKER BROWN ALE",
+                "LAMB SHOULDER: BRAISED IN OUR HOMAGE TO MESOPOTAMIA SHIRAZ AND HONEY PORTER",
+                "PORK SHOULDER: BRAISED IN OUR GEORDIE PAGODA PALE ALE",
+                "BEER-BRINED CHICKEN BREAST: BRINED IN OUR QUAYSIDE BLONDE CITRA ALE",
+                "VEGETARIAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY",
+                "VEGAN NUT ROAST (Vg): MATCH WITH OUR CUSHTY CUSHY"
+            ]
+        )
 
         dessert = st.radio("Dessert:", ["Non-Vegan Option", "Vegan Option"])
         allergies = st.text_area("Any allergies or intolerances?")
@@ -192,13 +264,13 @@ elif st.session_state.page == "🔐 Host View":
         if password == "abc123":
             st.session_state.admin_access = True
             st.success("Access granted.")
-            st.rerun()
         elif password:
             st.warning("Incorrect password.")
     else:
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
-        st.download_button("📅 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+        st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
