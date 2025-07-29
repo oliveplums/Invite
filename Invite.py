@@ -54,9 +54,9 @@ if st.session_state.page == "🎉 RSVP":
       <p style="text-align:center">
         <a href="https://maps.app.goo.gl/KmAgLYoyM88FNqFR8" target="_blank">📍 Chester-le-Street, County Durham</a>
       </p>
-      <h5>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h5>
-      <h5>🎭 <strong>Dress Code:</strong> <span style="font-weight: normal;">Lairds in </span><strong>kilts</strong><span style="font-weight: normal;"> or suits, Ladies in regal attire</span></h5>
-      <h5>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£37 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</span></h5>
+      <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
+      <h6>🎭 <strong>Dress Code:</strong> <span style="font-weight: normal;">Lairds in </span><strong>kilts</strong><span style="font-weight: normal;"> or suits, Ladies in regal attire</span></h6>
+      <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£37 toward the feast, if you can ❤️ (Apologies The rest is covered by me – just asking for a little help with the food!)</span></h6>
     </div>
     """, unsafe_allow_html=True)
 
