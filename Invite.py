@@ -4,15 +4,13 @@ from datetime import datetime
 st.markdown(
     """
     <style>
-    /* Make submit buttons have white text */
-    div.stButton > button {
+    /* Specifically target the form submit button */
+    form div.stButton > button {
         color: white !important;
-        background-color: #333 !important;  /* optional: dark background */
+        background-color: #333 !important;
         border: none !important;
     }
-
-    /* Optional: on hover, change button background for better UX */
-    div.stButton > button:hover {
+    form div.stButton > button:hover {
         background-color: #555 !important;
         color: white !important;
         cursor: pointer;
@@ -21,6 +19,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 st.markdown(
     """
     <style>
