@@ -198,7 +198,10 @@ elif st.session_state.page == "💳 Payment":
 
         monzo_link = f"https://monzo.me/{monzo_user}/{amount}?d={message}"
 
-        st.markdown(f"#### 🎉 [Pay £{amount} via Monzo.me]({monzo_link}) 🎉")
+        st.markdown(
+            f'<div style="text-align: center; font-size: 1.25rem;">🎉 <a href="{monzo_link}" target="_blank">Pay £{amount} via Monzo.me</a> 🎉</div>',
+            unsafe_allow_html=True
+        )
         st.markdown("---")
         st.write("After you've paid, let me know:")
 
