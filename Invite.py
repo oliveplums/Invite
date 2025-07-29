@@ -132,27 +132,30 @@ if st.session_state.page == "🎉 RSVP":
         st.markdown("### 🍽️ Meal")
 
 
+
         st.markdown("""
         **TRIMMINGS INCLUDE:** Mashed potato, roast skin-on small potatoes, braised red cabbage,  
         pureed carrot and swede mash, Yorkshire pudding, seasonal vegetables, and gravy.
         """)
         
+        meal_options = [
+            "BEEF BRISKET: braised in our Byker Brown Ale",
+            "LAMB SHOULDER: braised in our Homage to Mesopotamia Shiraz and Honey Porter",
+            "PORK SHOULDER: braised in our Geordie Pagoda Pale Ale",
+            "BEER-BRINED CHICKEN BREAST: brined in our Quayside Blonde Citra Ale",
+            "VEGETARIAN NUT ROAST: match with our Cushty Cushy",
+            "VEGAN NUT ROAST: match with our Cushty Cushy"
+        ]
+        
+        # Display each option manually with line breaks
+        styled_options = [f"**{opt.split(':')[0]}**  \n{opt.split(':')[1].strip()}" for opt in meal_options]
+        
+        # Show the radio with styled options
         course = st.radio(
             "Main Meal (choose one):",
-            [
-                "BEEF BRISKET: braised in our Byker Brown Ale",
-                "",
-                "LAMB SHOULDER: braised in our Homage to Mesopotamia Shiraz and Honey Porter",
-                "",
-                "PORK SHOULDER: braised in our Geordie Pagoda Pale Ale",
-                "",
-                "BEER-BRINED CHICKEN BREAST: brined in our Quayside Blonde Citra Ale",
-                "",
-                "VEGETARIAN NUT ROAST: match with our Cushty Cushy",
-                "",
-                "VEGAN NUT ROAST: match with our Cushty Cushy"
-            ]
+            styled_options
         )
+
 
 
         dessert = st.radio("Dessert:", ["Non-Vegan Option", "Vegan Option"])
