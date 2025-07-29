@@ -122,7 +122,7 @@ if st.session_state.page == "🎉 RSVP":
     - Dinner begins: **6:00pm**  
     - Ceilidh: **8:00pm**  
     - Bar Close: **11:30pm** 
-    - Carriages: **00:00am**  
+    - Kicking Out: **00:00am**  
     """)
 
     st.markdown("---")
