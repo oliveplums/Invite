@@ -224,7 +224,7 @@ if st.session_state.page == "🎉 RSVP":
                     st.session_state.show_payment = True
                     st.session_state.payment_done = False
                     st.session_state.page = "💳 Payment"
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.success("Thanks! Your RSVP has been recorded.")
 
