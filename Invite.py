@@ -1,7 +1,11 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
+# ---------- CONFIGURATION ----------
 st.set_page_config(
     page_title="Olivia's 30th Birthday RSVP",
     page_icon="🎭",
@@ -9,18 +13,38 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# ---------- EMAIL FUNCTION ----------
+def send_email_notification(new_entry):
+    sender_email = "oliviapalombo314@gmail.com"  # ← replace with your Gmail
+    receiver_email = "oliviapalombo314@gmail.com"
+    app_password = "Rooster6!!!"     # ← replace with your Gmail App Password
+
+    subject = f"New RSVP from {new_entry['Name']}"
+    body = "\n".join([f"{k}: {v}" for k, v in new_entry.items()])
+
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = subject
+    message.attach(MIMEText(body, "plain"))
+
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(sender_email, app_password)
+            server.sendmail(sender_email, receiver_email, message.as_string())
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+
+# ---------- BACKGROUND STYLING ----------
 st.markdown(
     """
     <style>
-    /* Use a sparkly gif as a full-page background */
     body {
         background-image: url("https://i.gifer.com/7CRL.gif");
         background-size: cover;
         background-attachment: fixed;
         background-position: center;
     }
-
-    /* So content stays readable on top */
     .stApp {
         background-color: rgba(255, 255, 255, 0.85);
         padding: 1rem;
@@ -31,7 +55,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---------- Load or Initialize Data ----------
+# ---------- LOAD OR INITIALIZE RSVP DATA ----------
 try:
     rsvps = pd.read_csv("rsvp_data.csv")
 except FileNotFoundError:
@@ -40,29 +64,27 @@ except FileNotFoundError:
         "Dessert", "Allergies", "Notes", "Timestamp", "Paid"
     ])
 
-# ---------- Session State ----------
-if "show_payment" not in st.session_state:
-    st.session_state.show_payment = False
-if "payment_done" not in st.session_state:
-    st.session_state.payment_done = False
-if "full_name" not in st.session_state:
-    st.session_state.full_name = ""
-if "page" not in st.session_state:
-    st.session_state.page = "🎉 RSVP"
-if "admin_access" not in st.session_state:
-    st.session_state.admin_access = False
+# ---------- SESSION STATE ----------
+for key, val in {
+    "show_payment": False,
+    "payment_done": False,
+    "full_name": "",
+    "page": "🎉 RSVP",
+    "admin_access": False
+}.items():
+    if key not in st.session_state:
+        st.session_state[key] = val
 
-# ---------- Navigation Sidebar ----------
+# ---------- NAVIGATION ----------
 page = st.sidebar.radio(
     "Navigate to:", 
     ["🎉 RSVP", "💳 Payment", "🔐 Host View"], 
-    index=["🎉 RSVP", "💳 Payment", "🔐 Host View"].index(st.session_state.page) if st.session_state.page in ["🎉 RSVP", "💳 Payment", "🔐 Host View"] else 0
+    index=["🎉 RSVP", "💳 Payment", "🔐 Host View"].index(st.session_state.page)
 )
 st.session_state.page = page
 
-# ---------- PAGE 1: RSVP ----------
-
-if st.session_state.page == "🎉 RSVP":
+# ---------- RSVP PAGE ----------
+if page == "🎉 RSVP":
     st.markdown("<h3 style='text-align: center;'>✨ Olivia's 30th ✨</h3>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>The Most Important Party of the Year.</h3>", unsafe_allow_html=True)
     st.markdown("<h6 style='text-align: center;'>Dinner and Ceilidh at Brinkburn Brewery</h6>", unsafe_allow_html=True)
@@ -76,66 +98,52 @@ if st.session_state.page == "🎉 RSVP":
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown(
-        """
-        <div style="text-align: center;">
-            <audio controls autoplay loop>
-              <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
-              Your browser does not support the audio element.
-            </audio>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <div style="text-align: center;">
+        <audio controls autoplay loop>
+          <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+    </div>
+    """, unsafe_allow_html=True)
 
-
-      
-    # 🎉 Countdown Timer
-    event_date = datetime(2026, 1, 17, 17, 0, 0)  # 5:00pm
+    # Countdown
+    event_date = datetime(2026, 1, 17, 17, 0, 0)
     now = datetime.now()
     countdown = event_date - now
-
     if countdown.total_seconds() > 0:
-        days = countdown.days
-        hours, remainder = divmod(countdown.seconds, 3600)
-        minutes, seconds = divmod(remainder, 60)
+        d, h = countdown.days, countdown.seconds // 3600
+        m, s = (countdown.seconds % 3600) // 60, countdown.seconds % 60
         st.markdown(f"""
         <div style="text-align: center; font-size: 1.5rem; padding: 1rem; background-color: #fffbe6; border-radius: 10px; margin-bottom: 1rem;">
             ⏳ <strong>Countdown to Party:</strong><br>
-            <span style="font-size: 2rem;">{days}d {hours}h {minutes}m {seconds}s</span>
+            <span style="font-size: 2rem;">{d}d {h}h {m}m {s}s</span>
         </div>
         """, unsafe_allow_html=True)
     else:
         st.markdown("🎉 The party has started!")
 
-    st.markdown(
-        """
+    st.markdown("""
         <h4 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
         <p style="text-align:center">
           <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
         </p>
-        <h6>🗓️ <strong>Date:</strong> <span style="font-weight: normal;">Saturday, 17th January 2026</span></h6>
+        <h6>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h6>
         <h6>🎭 <strong>Dress Code:</strong><br>
-            <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
-                Lairds: <strong>kilts</strong> or suits
-            </span>
-            <span style="font-weight: normal; padding-left: 1.5rem; display: block;">
-                Ladies: Dresses, fancy 👠💃 bring spare shoes if heels aren't the one for dancing
-            </span>
+            <span style="padding-left: 1.5rem;">Lairds: <strong>kilts</strong> or suits</span><br>
+            <span style="padding-left: 1.5rem;">Ladies: Dresses, heels optional 👠💃</span>
         </h6>
-        <h6>💰 <strong>Contribution:</strong> <span style="font-weight: normal;">£30 toward the meal and ceilidh, if you can ❤️ (Thank you, Rest will be covered by me)</span></h6>
-        """, unsafe_allow_html=True
-    )
+        <h6>💰 <strong>Contribution:</strong> £30 toward the meal and ceilidh, if you can ❤️</h6>
+    """, unsafe_allow_html=True)
 
     st.markdown("### 🕐 Timings:")
     st.markdown("""
     - Arrival/Bar opens: **5:00pm**  
     - Dinner begins: **6:00pm**  
     - Ceilidh: **8:00pm**  
-    - Bar Close: **11:30pm** 
-    - Kicking Out: **00:00am**  
+    - Bar Close: **11:30pm**  
+    - Kicking Out: **00:00am**
     """)
-
     st.markdown("---")
 
     with st.form("rsvp_form"):
@@ -143,16 +151,9 @@ if st.session_state.page == "🎉 RSVP":
         last_name = st.text_input("Last name")
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
         contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
-
         st.markdown("### 🍽️ Meal")
+        st.markdown("**TRIMMINGS INCLUDE:** Mashed potato, Yorkshire pudding, seasonal veg, gravy, and more.")
 
-
-
-        st.markdown("""
-        **TRIMMINGS INCLUDE:** Mashed potato, roast skin-on small potatoes, braised red cabbage,  
-        pureed carrot and swede mash, Yorkshire pudding, seasonal vegetables, and gravy.
-        """)
-        
         meal_options = [
             "BEEF BRISKET: braised in our Byker Brown Ale",
             "LAMB SHOULDER: braised in our Homage to Mesopotamia Shiraz and Honey Porter",
@@ -161,22 +162,11 @@ if st.session_state.page == "🎉 RSVP":
             "VEGETARIAN NUT ROAST: match with our Cushty Cushy",
             "VEGAN NUT ROAST: match with our Cushty Cushy"
         ]
-        
-        # Display each option manually with line breaks
         styled_options = [f"**{opt.split(':')[0]}**  \n{opt.split(':')[1].strip()}" for opt in meal_options]
-        
-        # Show the radio with styled options
-        course = st.radio(
-            "Main Meal (choose one):",
-            styled_options
-        )
-
-
-
+        course = st.radio("Main Meal (choose one):", styled_options)
         dessert = st.radio("Dessert:", ["Non-Vegan Option", "Vegan Option"])
         allergies = st.text_area("Any allergies or intolerances?")
         notes = st.text_area("Other notes or special requests. e.g. Mobility issues, etc.")
-
         submitted = st.form_submit_button("Submit RSVP")
 
         if submitted:
@@ -186,9 +176,7 @@ if st.session_state.page == "🎉 RSVP":
                 full_name = f"{first_name.strip()} {last_name.strip()}"
                 st.session_state.full_name = full_name
 
-                # Remove previous entry with the same name if exists
                 rsvps = rsvps[~rsvps["Name"].str.strip().str.lower().eq(full_name.strip().lower())]
-
                 new_entry = {
                     "Name": full_name,
                     "Attending": attending,
@@ -200,53 +188,41 @@ if st.session_state.page == "🎉 RSVP":
                     "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     "Paid": "No"
                 }
-
                 rsvps = pd.concat([rsvps, pd.DataFrame([new_entry])], ignore_index=True)
                 rsvps.to_csv("rsvp_data.csv", index=False)
+
+                send_email_notification(new_entry)  # ← Email is sent here
 
                 if attending == "Yes" and contribution == "Yes":
                     st.success("Thanks! You're being redirected to the payment page...")
                     st.session_state.show_payment = True
-                    st.session_state.payment_done = False
                     st.session_state.page = "💳 Payment"
                     st.rerun()
                 else:
                     st.success("Thanks! Your RSVP has been recorded.")
 
-# ---------- PAGE 2: Payment ----------
-elif st.session_state.page == "💳 Payment":
+# ---------- PAYMENT PAGE ----------
+elif page == "💳 Payment":
     if not st.session_state.show_payment:
         st.info("Please RSVP first before accessing the payment section.")
     elif st.session_state.payment_done:
         st.success("✅ Payment already confirmed. Thank you!")
     else:
         st.subheader("❤️ Thank You So Much! ❤️")
-        st.write("See? Now you dont have to cry thinking you cant be with me on my birthday!")
-        monzo_user = "oliviapalombo"
-        amount = 30
-        message = st.session_state.full_name.replace(" ", "+")
-        monzo_link = f"https://monzo.me/{monzo_user}/{amount}?d={message}"
-
-        st.markdown(
-            f'<div style="text-align: center; font-size: 1.25rem;">🎉 <a href="{monzo_link}" target="_blank">Pay £{amount} via Monzo.me</a> 🎉</div>',
-            unsafe_allow_html=True
-        )
-
+        st.write("Now you don't have to cry thinking you can't be with me on my birthday!")
+        monzo_link = f"https://monzo.me/oliviapalombo/30?d={st.session_state.full_name.replace(' ', '+')}"
+        st.markdown(f'<div style="text-align: center;"><a href="{monzo_link}" target="_blank">💳 Pay £30 via Monzo.me</a></div>', unsafe_allow_html=True)
         st.markdown("---")
-        st.write("After you've paid, let me know:")
-
-        if st.button("✅ I’ve Paid", use_container_width=True, key="payment_confirm"):
+        if st.button("✅ I’ve Paid", use_container_width=True):
             st.session_state.payment_done = True
-            name_lower = st.session_state.full_name.strip().lower()
-            rsvps.loc[rsvps["Name"].str.strip().str.lower() == name_lower, "Paid"] = "Yes"
+            rsvps.loc[rsvps["Name"].str.lower().str.strip() == st.session_state.full_name.lower().strip(), "Paid"] = "Yes"
             rsvps.to_csv("rsvp_data.csv", index=False)
             st.balloons()
-            st.success("🎉 Thanks! Payment confirmed. 👑✨")
+            st.success("🎉 Thanks! Payment confirmed.")
 
-# ---------- PAGE 3: Host View ----------
-elif st.session_state.page == "🔐 Host View":
+# ---------- HOST VIEW ----------
+elif page == "🔐 Host View":
     st.subheader("👑 Host RSVP Dashboard")
-
     if not st.session_state.admin_access:
         password = st.text_input("Enter host password:", type="password")
         if password == "abc123":
@@ -258,6 +234,7 @@ elif st.session_state.page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
