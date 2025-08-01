@@ -98,14 +98,6 @@ if page == "🎉 RSVP":
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div style="text-align: center;">
-        <audio controls autoplay loop>
-          <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mp3">
-          Your browser does not support the audio element.
-        </audio>
-    </div>
-    """, unsafe_allow_html=True)
 
     # Countdown
     event_date = datetime(2026, 1, 17, 17, 0, 0)
@@ -234,6 +226,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
