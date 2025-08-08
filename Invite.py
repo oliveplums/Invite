@@ -164,7 +164,7 @@ if page == "🎉 RSVP":
             """
         )
         
-        accom_friday = st.checkbox("Friday night")
+        accom_friday = st.checkbox("Friday and Saturday night")
         accom_saturday = st.checkbox("Saturday night")
 
         
@@ -262,6 +262,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
