@@ -146,12 +146,27 @@ if page == "🎉 RSVP":
 
         # Accommodation Option
         st.markdown("### 🏨 Accommodation")
+        
         st.markdown(
-            "I'll can talk to nearby hotel on the Quayside and I'll try to get a group discount. Tick what dates if you would like me look into, or leave blank if you would like to sort your own."
+            """
+            I can contact a nearby hotel with apartments on the Quayside  
+            ([Staybridge Suites Newcastle](https://www.ihg.com/staybridge/hotels/gb/en/newcastle-upon-tyne/nclms/hoteldetail))  
+            for the following rates (including breakfast):
+        
+            - **Friday to Sunday:** up to £104 pp/night  
+            - **Saturday to Sunday:** up to £63.50 pp/night  
+        
+            I am trying to arrange a group discount so can be cheaper than above.  
+            The suites have full kitchens, gym access, and are close to the Ouseburn and Quayside areas.  
+        
+            Please tick the nights you’d like me to look into,  
+            or leave both blank if you prefer to arrange your own.
+            """
         )
         
         accom_friday = st.checkbox("Friday night")
         accom_saturday = st.checkbox("Saturday night")
+
         
         # Combine into a list for saving
         accommodation = []
@@ -247,6 +262,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
