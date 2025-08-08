@@ -85,27 +85,67 @@ st.session_state.page = page
 
 # ---------- RSVP PAGE ----------
 if page == "🎉 RSVP":
+    st.markdown("<h3 style='text-align: center;'>✨ Olivia's 30th ✨</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>The Most Important Party of the Year.</h3>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center;'>Dinner and Ceilidh at Brinkburn Brewery</h6>", unsafe_allow_html=True)
+
+    st.image("AIPIC.png", use_container_width=True)
+
+    st.markdown("""
+    <div style="padding:1rem; border-radius:0.75rem; border:1px solid var(--secondary-background); background-color:rgba(255,255,255,0.05)">
+      <h3 style="text-align:center;">👑 You are invited! 👑</h3>
+      <h5 style="text-align:center;">B THERE OR B SQUARE</h5>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+    # Countdown
+    event_date = datetime(2026, 1, 17, 17, 0, 0)
+    now = datetime.now()
+    countdown = event_date - now
+    if countdown.total_seconds() > 0:
+        d, h = countdown.days, countdown.seconds // 3600
+        m, s = (countdown.seconds % 3600) // 60, countdown.seconds % 60
+        st.markdown(f"""
+        <div style="text-align: center; font-size: 1.5rem; padding: 0.5rem; background-color: #fffbe6; border-radius: 10px; margin-bottom: 0.5rem;">
+            ⏳ <strong>Countdown to Party:</strong><br>
+            <span style="font-size: 2rem;">{d}d {h}h</span>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("🎉 The party has started!")
+
+    st.markdown("""
+        <h2 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
+        <p style="text-align:center">
+          <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
+        </p>
+        <h6>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h6>
+        <h6>🎭 <strong>Dress Code:</strong><br>
+            <span style="padding-left: 1.5rem;">Lairds: <strong>kilts</strong> or suit {if unable to hire a kilt}</span><br>
+            <span style="padding-left: 1.5rem;">Ladies: Dresses,💃 Shoes you can dance in OR Spare pair to dance in 👠💃</span>
+        </h6>
+        <h6>💰 <strong>Contribution:</strong> £30 toward the meal and ceilidh, if you can ❤️</h6>
+    """, unsafe_allow_html=True)
+
+    st.markdown("### 🕐 Timings:")
+    st.markdown("""
+    - Arrival/Bar opens: **4:30pm**  
+    - Dinner begins: **5:30pm**  
+    - Ceilidh: **7:30pm**  
+    - Bar Close: **11:30pm**  
+    - Kicking Out: **00:00am**
+    """)
+    st.markdown("---")
+
     with st.form("rsvp_form"):
         first_name = st.text_input("First name")
         last_name = st.text_input("Last name")
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
         contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
-        
-        # Accommodation Option
-        st.markdown("### 🏨 Accommodation")
-        st.markdown(
-            "I'll be arranging a nearby hotel for everyone so we can stay together, "
-            "and I'll try to get a group discount. Tick if you need accommodation."
-        )
-        accommodation = st.multiselect(
-            "Which nights would you like accommodation for?",
-            ["Friday night", "Saturday night"],
-            help="You can select one or both nights, or leave blank if you don't need it."
-        )
-    
         st.markdown("### 🍽️ Meal")
         st.markdown("**TRIMMINGS INCLUDE:** Mashed potato, Yorkshire pudding, seasonal veg, gravy, and more.")
-    
+
         meal_options = [
             "BEEF BRISKET: braised in our Byker Brown Ale",
             "LAMB SHOULDER: braised in our Homage to Mesopotamia Shiraz and Honey Porter",
@@ -121,20 +161,19 @@ if page == "🎉 RSVP":
         allergies = st.text_area("Any allergies or intolerances?")
         notes = st.text_area("Other notes or special requests. e.g. Mobility issues, etc.")
         submitted = st.form_submit_button("Submit RSVP")
-    
+
         if submitted:
             if not first_name.strip() or not last_name.strip():
                 st.error("Please enter both your first and last name.")
             else:
                 full_name = f"{first_name.strip()} {last_name.strip()}"
                 st.session_state.full_name = full_name
-    
+
                 rsvps = rsvps[~rsvps["Name"].str.strip().str.lower().eq(full_name.strip().lower())]
                 new_entry = {
                     "Name": full_name,
                     "Attending": attending,
                     "Contribution": contribution,
-                    "Accommodation": ", ".join(accommodation) if accommodation else "None",
                     "Main Meal": course,
                     "Dessert": dessert,
                     "Wine": Wine,
@@ -145,9 +184,9 @@ if page == "🎉 RSVP":
                 }
                 rsvps = pd.concat([rsvps, pd.DataFrame([new_entry])], ignore_index=True)
                 rsvps.to_csv("rsvp_data.csv", index=False)
-    
-                send_email_notification(new_entry)
-    
+
+                send_email_notification(new_entry)  # ← Email is sent here
+
                 if attending == "Yes" and contribution == "Yes":
                     st.success("Thanks! You're being redirected to the payment page...")
                     st.session_state.show_payment = True
@@ -190,6 +229,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
