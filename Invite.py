@@ -150,12 +150,17 @@ if page == "🎉 RSVP":
             "I'll be arranging a nearby hotel for everyone so we can stay together, "
             "and I'll try to get a group discount. Tick if you need accommodation."
         )
-        accommodation = st.multiselect(
-            "Which nights would you like accommodation for?",
-            ["Friday night", "Saturday night"],
-            help="You can select one or both nights, or leave blank if you don't need it."
-        )
-    
+        
+        accom_friday = st.checkbox("Friday night")
+        accom_saturday = st.checkbox("Saturday night")
+        
+        # Combine into a list for saving
+        accommodation = []
+        if accom_friday:
+            accommodation.append("Friday night")
+        if accom_saturday:
+            accommodation.append("Saturday night")
+            
         st.markdown("### 🍽️ Meal")
         st.markdown("**TRIMMINGS INCLUDE:** Mashed potato, Yorkshire pudding, seasonal veg, gravy, and more.")
 
@@ -243,6 +248,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
