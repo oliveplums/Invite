@@ -143,6 +143,19 @@ if page == "🎉 RSVP":
         last_name = st.text_input("Last name")
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
         contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
+
+        # Accommodation Option
+        st.markdown("### 🏨 Accommodation")
+        st.markdown(
+            "I'll be arranging a nearby hotel for everyone so we can stay together, "
+            "and I'll try to get a group discount. Tick if you need accommodation."
+        )
+        accommodation = st.multiselect(
+            "Which nights would you like accommodation for?",
+            ["Friday night", "Saturday night"],
+            help="You can select one or both nights, or leave blank if you don't need it."
+        )
+    
         st.markdown("### 🍽️ Meal")
         st.markdown("**TRIMMINGS INCLUDE:** Mashed potato, Yorkshire pudding, seasonal veg, gravy, and more.")
 
@@ -174,6 +187,7 @@ if page == "🎉 RSVP":
                     "Name": full_name,
                     "Attending": attending,
                     "Contribution": contribution,
+                    "Accommodation": ", ".join(accommodation) if accommodation else "None",
                     "Main Meal": course,
                     "Dessert": dessert,
                     "Wine": Wine,
@@ -229,6 +243,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
