@@ -147,8 +147,7 @@ if page == "🎉 RSVP":
         # Accommodation Option
         st.markdown("### 🏨 Accommodation")
         st.markdown(
-            "I'll be arranging a nearby hotel for everyone so we can stay together, "
-            "and I'll try to get a group discount. Tick if you need accommodation."
+            "I'll can talk to nearby hotel on the Quayside and I'll try to get a group discount. Tick what dates if you would like me look into, or leave blank if you would like to sort your own."
         )
         
         accom_friday = st.checkbox("Friday night")
@@ -175,7 +174,7 @@ if page == "🎉 RSVP":
         styled_options = [f"**{opt.split(':')[0]}**  \n{opt.split(':')[1].strip()}" for opt in meal_options]
         course = st.radio("Main Meal (choose one):", styled_options)
         dessert = st.radio("Dessert:", ["Non-Vegan Option", "Vegan Option"])
-        Wine = st.radio("Glass of Wine:", ["Red", "White"])
+        #Wine = st.radio("Glass of Wine:", ["Red", "White"])
         allergies = st.text_area("Any allergies or intolerances?")
         notes = st.text_area("Other notes or special requests. e.g. Mobility issues, etc.")
         submitted = st.form_submit_button("Submit RSVP")
@@ -248,6 +247,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
