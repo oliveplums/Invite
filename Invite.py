@@ -173,7 +173,7 @@ if page == "🎉 RSVP":
         # Single-choice option
         accommodation_choice = st.radio(
             "Select accommodation option:",
-            options=["Friday and Saturday night", "Saturday night"],
+            options=["None","Friday and Saturday night", "Saturday night"],
             index=0
         )
         
@@ -267,6 +267,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
