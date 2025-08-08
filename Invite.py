@@ -122,7 +122,7 @@ if page == "🎉 RSVP":
         </p>
         <h6>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h6>
         <h6>🎭 <strong>Dress Code:</strong><br>
-            <span style="padding-left: 1.5rem;">Lairds: <strong>kilts</strong> or suit {if unable to hire a kilt}</span><br>
+            <span style="padding-left: 1.5rem;">Lairds: <strong>kilts {contact me a}</strong> or suit</span><br>
             <span style="padding-left: 1.5rem;">Ladies: Dresses,💃 Shoes you can dance in OR Spare pair to dance in 👠💃</span>
         </h6>
         <h6>💰 <strong>Contribution:</strong> £30 toward the meal and ceilidh, if you can ❤️</h6>
@@ -262,6 +262,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
