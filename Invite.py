@@ -88,7 +88,6 @@ if page == "🎉 RSVP":
     st.markdown("<h3 style='text-align: center;'>✨ Olivia's 30th ✨</h3>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>17th January 2026</h3>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>The Most Important Party of the Year.</h3>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center;'>RSVP by  15th August 2025</h3>", unsafe_allow_html=True)
     st.markdown("<h6 style='text-align: center;'>Dinner and Ceilidh at Brinkburn Brewery</h6>", unsafe_allow_html=True)
 
     st.image("AIPIC.png", use_container_width=True)
@@ -269,6 +268,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
