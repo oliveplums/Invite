@@ -61,7 +61,7 @@ try:
 except FileNotFoundError:
     rsvps = pd.DataFrame(columns=[
         "Name", "Attending", "Contribution", "Main Meal",
-        "Dessert", "Allergies", "Notes", "Timestamp", "Paid"
+        "Dessert", "Allergies", "Notes", "Timestamp", "Paid", "Wine"
     ])
 
 # ---------- SESSION STATE ----------
@@ -109,7 +109,7 @@ if page == "🎉 RSVP":
         st.markdown(f"""
         <div style="text-align: center; font-size: 1.5rem; padding: 1rem; background-color: #fffbe6; border-radius: 10px; margin-bottom: 1rem;">
             ⏳ <strong>Countdown to Party:</strong><br>
-            <span style="font-size: 2rem;">{d}d {h}h {m}m {s}s</span>
+            <span style="font-size: 2rem;">{d}d {h}h</span>
         </div>
         """, unsafe_allow_html=True)
     else:
@@ -130,9 +130,9 @@ if page == "🎉 RSVP":
 
     st.markdown("### 🕐 Timings:")
     st.markdown("""
-    - Arrival/Bar opens: **3:00pm**  
-    - Dinner begins: **5:00pm**  
-    - Ceilidh: **7:00pm**  
+    - Arrival/Bar opens: **4:30pm**  
+    - Dinner begins: **5:30pm**  
+    - Ceilidh: **7:30pm**  
     - Bar Close: **11:30pm**  
     - Kicking Out: **00:00am**
     """)
@@ -157,6 +157,7 @@ if page == "🎉 RSVP":
         styled_options = [f"**{opt.split(':')[0]}**  \n{opt.split(':')[1].strip()}" for opt in meal_options]
         course = st.radio("Main Meal (choose one):", styled_options)
         dessert = st.radio("Dessert:", ["Non-Vegan Option", "Vegan Option"])
+        Wine = st.radio("Glass of Wine:", ["Red", "White"])
         allergies = st.text_area("Any allergies or intolerances?")
         notes = st.text_area("Other notes or special requests. e.g. Mobility issues, etc.")
         submitted = st.form_submit_button("Submit RSVP")
@@ -175,6 +176,7 @@ if page == "🎉 RSVP":
                     "Contribution": contribution,
                     "Main Meal": course,
                     "Dessert": dessert,
+                    "Wine": Wine,
                     "Allergies": allergies,
                     "Notes": notes,
                     "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -226,6 +228,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
