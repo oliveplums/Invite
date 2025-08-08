@@ -149,7 +149,7 @@ if page == "🎉 RSVP":
         
         st.markdown(
             """
-            I can contact a nearby hotel with Apartments on the Quayside  
+            I will contact a nearby hotel with Apartments on the Quayside  
             ([Staybridge Suites Newcastle](https://www.ihg.com/staybridge/hotels/gb/en/newcastle-upon-tyne/nclms/hoteldetail))  
             for the following rates (including breakfast):
         
@@ -262,6 +262,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
