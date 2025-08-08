@@ -61,7 +61,7 @@ try:
 except FileNotFoundError:
     rsvps = pd.DataFrame(columns=[
         "Name", "Attending", "Contribution","Accommodation", "Main Meal",
-        "Dessert", "Allergies", "Notes", "Timestamp", "Paid", "Wine"
+        "Dessert", "Allergies", "Notes", "Timestamp", "Paid"
     ])
 
 # ---------- SESSION STATE ----------
@@ -209,7 +209,7 @@ if page == "🎉 RSVP":
                     "Accommodation": ", ".join(accommodation) if accommodation else "None",
                     "Main Meal": course,
                     "Dessert": dessert,
-                    "Wine": Wine,
+                    #"Wine": Wine,
                     "Allergies": allergies,
                     "Notes": notes,
                     "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -262,6 +262,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
