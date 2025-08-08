@@ -94,7 +94,7 @@ if page == "🎉 RSVP":
     st.markdown("""
     <div style="padding:1rem; border-radius:0.75rem; border:1px solid var(--secondary-background); background-color:rgba(255,255,255,0.05)">
       <h3 style="text-align:center;">👑 You are invited! 👑</h3>
-      <h5 style="text-align:center;">B THERE OR BE SQUARE</h5>
+      <h5 style="text-align:center;">B THERE OR B SQUARE</h5>
     </div>
     """, unsafe_allow_html=True)
 
@@ -116,23 +116,23 @@ if page == "🎉 RSVP":
         st.markdown("🎉 The party has started!")
 
     st.markdown("""
-        <h4 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
+        <h2 style="text-align:center;"><strong>Brinkburn Brewery</strong></h4>
         <p style="text-align:center">
           <a href="https://maps.app.goo.gl/m6KnHvk6p7oLzkUN9" target="_blank">📍 Ouseburn, Newcastle</a>
         </p>
         <h6>🗓️ <strong>Date:</strong> Saturday, 17th January 2026</h6>
         <h6>🎭 <strong>Dress Code:</strong><br>
-            <span style="padding-left: 1.5rem;">Lairds: <strong>kilts</strong> or suits</span><br>
-            <span style="padding-left: 1.5rem;">Ladies: Dresses, heels optional 👠💃</span>
+            <span style="padding-left: 1.5rem;">Lairds: <strong>kilts</strong> or suit if unable to hire a kilt</span><br>
+            <span style="padding-left: 1.5rem;">Ladies: Dresses,💃 Shoes you can dance in OR Spare pair to dance in 👠💃</span>
         </h6>
         <h6>💰 <strong>Contribution:</strong> £30 toward the meal and ceilidh, if you can ❤️</h6>
     """, unsafe_allow_html=True)
 
     st.markdown("### 🕐 Timings:")
     st.markdown("""
-    - Arrival/Bar opens: **5:00pm**  
-    - Dinner begins: **6:00pm**  
-    - Ceilidh: **8:00pm**  
+    - Arrival/Bar opens: **3:00pm**  
+    - Dinner begins: **5:00pm**  
+    - Ceilidh: **7:00pm**  
     - Bar Close: **11:30pm**  
     - Kicking Out: **00:00am**
     """)
@@ -226,6 +226,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
