@@ -92,7 +92,7 @@ if page == "🎉 RSVP":
     st.image("AIPIC.png", use_container_width=True)
 
     st.markdown("""
-    <div style="padding:1rem; border-radius:0.5rem; border:1px solid var(--secondary-background); background-color:rgba(255,255,255,0.05)">
+    <div style="padding:1rem; border-radius:0.75rem; border:1px solid var(--secondary-background); background-color:rgba(255,255,255,0.05)">
       <h3 style="text-align:center;">👑 You are invited! 👑</h3>
       <h5 style="text-align:center;">B THERE OR B SQUARE</h5>
     </div>
@@ -107,7 +107,7 @@ if page == "🎉 RSVP":
         d, h = countdown.days, countdown.seconds // 3600
         m, s = (countdown.seconds % 3600) // 60, countdown.seconds % 60
         st.markdown(f"""
-        <div style="text-align: center; font-size: 1.5rem; padding: 1rem; background-color: #fffbe6; border-radius: 10px; margin-bottom: 1rem;">
+        <div style="text-align: center; font-size: 1.5rem; padding: 0.5rem; background-color: #fffbe6; border-radius: 10px; margin-bottom: 0.5rem;">
             ⏳ <strong>Countdown to Party:</strong><br>
             <span style="font-size: 2rem;">{d}d {h}h</span>
         </div>
@@ -228,6 +228,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
