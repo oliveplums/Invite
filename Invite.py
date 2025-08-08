@@ -238,8 +238,8 @@ if page == "🎉 RSVP":
 elif page == "💳 Payment":
     if not st.session_state.show_payment:
         st.info("Please RSVP first before accessing the payment section.")
-    elif st.session_state.payment_done:
-        st.success("✅ Payment already confirmed. Thank you!")
+    # elif st.session_state.payment_done:
+    #     st.success("✅ Payment already confirmed. Thank you!")
     else:
         st.subheader("❤️ Thank You So Much! ❤️")
         st.write("Now you don't have to cry thinking you can't be with me on my birthday!")
@@ -267,6 +267,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
