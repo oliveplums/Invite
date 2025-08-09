@@ -35,10 +35,10 @@ def save_to_github():
     }
 
     r = requests.put(url, headers=headers, data=json.dumps(data))
-    if r.status_code in [200, 201]:
-        st.success("RSVP saved to GitHub 🎉")
-    else:
-        st.error(f"GitHub save failed: {r.text}")
+    # if r.status_code in [200, 201]:
+    #     st.success("RSVP saved to GitHub 🎉")
+    # else:
+    #     st.error(f"GitHub save failed: {r.text}")
 
 
 # ---------- CONFIGURATION ----------
@@ -303,6 +303,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
