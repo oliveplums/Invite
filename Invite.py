@@ -262,8 +262,8 @@ if page == "🎉 RSVP":
                     st.success("Thanks! You're being redirected to the payment page...")
                     st.session_state.show_payment = True
                     st.session_state.page = "💳 Payment"
+                    save_to_github()       # Save **before** rerunning
                     st.rerun()
-                    save_to_github()
                 else:
                     st.success("Thanks! Your RSVP has been recorded.")
                     save_to_github()
@@ -303,6 +303,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
