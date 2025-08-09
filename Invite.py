@@ -14,6 +14,7 @@ GITHUB_REPO = "oliveplums/invite"  # e.g. "oliviapalombo/rsvp"
 GITHUB_FILE_PATH = "rsvp_data.csv"  # Path in repo
 
 def save_to_github():
+    token = st.secrets["github"]["token"] 
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
 
@@ -302,6 +303,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
