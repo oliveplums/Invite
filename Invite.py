@@ -5,6 +5,42 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+import requests
+import base64
+import json
+
+# --- GITHUB CONFIG ---
+GITHUB_TOKEN = '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'
+GITHUB_REPO = "oliveplums/invite"  # e.g. "oliviapalombo/rsvp"
+GITHUB_FILE_PATH = "rsvp_data.csv"  # Path in repo
+
+def save_to_github():
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+
+    # Get existing file SHA
+    r = requests.get(url, headers=headers)
+    sha = r.json().get("sha", None)
+
+    # Read local CSV and encode to base64
+    with open("rsvp_data.csv", "rb") as f:
+        content = base64.b64encode(f.read()).decode("utf-8")
+
+    commit_message = f"Update RSVP data ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')})"
+
+    data = {
+        "message": commit_message,
+        "content": content,
+        "sha": sha
+    }
+
+    r = requests.put(url, headers=headers, data=json.dumps(data))
+    # if r.status_code in [200, 201]:
+    #     st.success("RSVP saved to GitHub 🎉")
+    # else:
+    #     st.error(f"GitHub save failed: {r.text}")
+
+
 # ---------- CONFIGURATION ----------
 st.set_page_config(
     page_title="Olivia's 30th Birthday RSVP",
@@ -220,16 +256,17 @@ if page == "🎉 RSVP":
                 }
                 rsvps = pd.concat([rsvps, pd.DataFrame([new_entry])], ignore_index=True)
                 rsvps.to_csv("rsvp_data.csv", index=False)
-
-                send_email_notification(new_entry)  # ← Email is sent here
+            
 
                 if attending == "Yes" and contribution == "Yes":
                     st.success("Thanks! You're being redirected to the payment page...")
                     st.session_state.show_payment = True
                     st.session_state.page = "💳 Payment"
                     st.rerun()
+                    save_to_github()
                 else:
                     st.success("Thanks! Your RSVP has been recorded.")
+                    save_to_github()
 
 
 # ---------- PAYMENT PAGE ----------
@@ -248,6 +285,7 @@ elif page == "💳 Payment":
             st.session_state.payment_done = True
             rsvps.loc[rsvps["Name"].str.lower().str.strip() == st.session_state.full_name.lower().strip(), "Paid"] = "Yes"
             rsvps.to_csv("rsvp_data.csv", index=False)
+            save_to_github()
             st.balloons()
             st.success("🎉 Thanks! Payment confirmed.")
 
@@ -265,6 +303,23 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
