@@ -242,7 +242,7 @@ elif page == "💳 Payment":
         st.subheader("❤️ Thank You So Much! ❤️")
         st.write("Now you don't have to cry thinking you can't be with me on my birthday!")
         monzo_link = f"https://monzo.me/oliviapalombo/30?d={st.session_state.full_name.replace(' ', '+')}"
-        st.markdown(f'<div style="text-align: center;"><a href="{monzo_link}" target="_blank">💳 Pay £30 via Monzo.me</a></div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="text-align: center;"><a href="{monzo_link}" target="_blank">💳 Click to Pay £30 </a></div>', unsafe_allow_html=True)
         st.markdown("---")
         if st.button("✅ I’ve Paid", use_container_width=True):
             st.session_state.payment_done = True
@@ -265,6 +265,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
