@@ -1,29 +1,27 @@
-Unnamed: 0,Name,Attending,Notes,Timestamp,Contribution,Diet,Allergies,Paid,Accommodation,Main Meal,Dessert
-0.0,Olive Plums,Yes,,2025-08-09 12:42:03,Yes,,,Yes,,"**BEEF BRISKET**  
+Name,Attending,Notes,Timestamp,Contribution,Diet,Allergies,Paid,Accommodation,Main Meal,Dessert
+,Olive Plums,Yes,,2025-08-09 12:42:03,Yes,,,Yes,,"**BEEF BRISKET**  
 braised in our Byker Brown Ale",Non-Vegan Option
-1.0,Ellen Thompson,Yes,,2025-08-09 11:50:06,Yes,,,Yes,,"**VEGETARIAN NUT ROAST**  
+,Ellen Thompson,Yes,,2025-08-09 11:50:06,Yes,,,Yes,,"**VEGETARIAN NUT ROAST**  
 match with our Cushty Cushy",Non-Vegan Option
-2.0,Matthew Burns,Yes,Please ensure staff are aware that my meal cannot be braised with any alcohol or ale as described,2025-08-09 11:51:23,Yes,,,Yes,,"**BEEF BRISKET**  
+,Matthew Burns,Yes,Please ensure staff are aware that my meal cannot be braised with any alcohol or ale as described,2025-08-09 11:51:23,Yes,,,Yes,,"**BEEF BRISKET**  
 braised in our Byker Brown Ale",Non-Vegan Option
-3.0,Rach “Pickle” Horner,Yes,,2025-08-09 11:52:27,Yes,,,Yes,,"**LAMB SHOULDER**  
+,Rach “Pickle” Horner,Yes,,2025-08-09 11:52:27,Yes,,,Yes,,"**LAMB SHOULDER**  
 braised in our Homage to Mesopotamia Shiraz and Honey Porter",Non-Vegan Option
-4.0,Nick “Slick” McCulloch,Yes,,2025-08-09 11:52:45,Yes,,,No,,"**BEEF BRISKET**  
+,Nick “Slick” McCulloch,Yes,,2025-08-09 11:52:45,Yes,,,No,,"**BEEF BRISKET**  
 braised in our Byker Brown Ale",Non-Vegan Option
-5.0,Sam Palombo,Yes,,2025-08-09 11:53:34,Yes,,women and cats,Yes,,"**BEER-BRINED CHICKEN BREAST**  
+,Sam Palombo,Yes,,2025-08-09 11:53:34,Yes,,women and cats,Yes,,"**BEER-BRINED CHICKEN BREAST**  
 brined in our Quayside Blonde Citra Ale",Non-Vegan Option
-6.0,Ruby Heywood,Yes,,2025-08-09 11:53:56,Yes,,,No,,"**VEGETARIAN NUT ROAST**  
+,Ruby Heywood,Yes,,2025-08-09 11:53:56,Yes,,,No,,"**VEGETARIAN NUT ROAST**  
 match with our Cushty Cushy",Non-Vegan Option
-7.0,Sophie Harrison,Yes,,2025-08-09 11:54:30,Yes,,,No,,"**VEGETARIAN NUT ROAST**  
+,Sophie Harrison,Yes,,2025-08-09 11:54:30,Yes,,,No,,"**VEGETARIAN NUT ROAST**  
 match with our Cushty Cushy",Non-Vegan Option
-8.0,Frankie Hall,Yes,,2025-08-09 11:54:50,Yes,,,No,,"**BEEF BRISKET**  
+,Frankie Hall,Yes,,2025-08-09 11:54:50,Yes,,,No,,"**BEEF BRISKET**  
 braised in our Byker Brown Ale",Non-Vegan Option
-9.0,Alice Palombo,Yes,,2025-08-09 11:55:14,Yes,,,No,Saturday night,"**PORK SHOULDER**  
+,Alice Palombo,Yes,,2025-08-09 11:55:14,Yes,,,No,Saturday night,"**PORK SHOULDER**  
 braised in our Geordie Pagoda Pale Ale",Non-Vegan Option
-10.0,Josh Buckner,Yes,I will be immobile after a million pints,2025-08-09 11:55:44,Yes,,,No,,"**BEEF BRISKET**  
+,Josh Buckner,Yes,I will be immobile after a million pints,2025-08-09 11:55:44,Yes,,,No,,"**BEEF BRISKET**  
 braised in our Byker Brown Ale",Non-Vegan Option
-11.0,Steph Kusalakumar,Yes,,2025-08-09 11:56:08,Yes,,,No,,"**BEEF BRISKET**  
-braised in our Byker Brown Ale",Non-Vegan Option
-,t t,Yes,,2025-08-09 12:08:56,Yes,,,Yes,,"**BEEF BRISKET**  
+,Steph Kusalakumar,Yes,,2025-08-09 11:56:08,Yes,,,No,,"**BEEF BRISKET**  
 braised in our Byker Brown Ale",Non-Vegan Option
 ,Joseph Riley,Yes,,2025-08-09 12:10:09,Yes,,,No,None,"**LAMB SHOULDER**  
 braised in our Homage to Mesopotamia Shiraz and Honey Porter",Non-Vegan Option
