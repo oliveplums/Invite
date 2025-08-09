@@ -10,7 +10,6 @@ import base64
 import json
 
 # --- GITHUB CONFIG ---
-GITHUB_TOKEN = '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'
 GITHUB_REPO = "oliveplums/invite"  # e.g. "oliviapalombo/rsvp"
 GITHUB_FILE_PATH = "rsvp_data.csv"  # Path in repo
 
@@ -303,6 +302,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
