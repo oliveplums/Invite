@@ -96,7 +96,7 @@ try:
     rsvps = pd.read_csv("rsvp_data.csv")
 except FileNotFoundError:
     rsvps = pd.DataFrame(columns=[
-        "Name", "Attending", "Contribution","Accommodation", "Main Meal",
+        "Name", "Attending", "Contribution", "Main Meal",
         "Dessert", "Allergies", "Notes", "Timestamp", "Paid"
     ])
 
@@ -186,8 +186,6 @@ if page == "🎉 RSVP":
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
         contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
 
-        accommodation = [] 
-            
         st.markdown("### 🍽️ Meal")
         st.markdown("**TRIMMINGS INCLUDE:** Mashed potato, Yorkshire pudding, seasonal veg, gravy, and more.")
 
@@ -219,7 +217,6 @@ if page == "🎉 RSVP":
                     "Name": full_name,
                     "Attending": attending,
                     "Contribution": contribution,
-                    "Accommodation": ", ".join(accommodation) if accommodation else "None",
                     "Main Meal": course,
                     "Dessert": dessert,
                     #"Wine": Wine,
@@ -277,6 +274,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
