@@ -219,7 +219,6 @@ if page == "🎉 RSVP":
                     "Contribution": contribution,
                     "Main Meal": course,
                     "Dessert": dessert,
-                    #"Wine": Wine,
                     "Allergies": allergies,
                     "Notes": notes,
                     "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -274,6 +273,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
