@@ -186,32 +186,6 @@ if page == "🎉 RSVP":
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
         contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
 
-        # Accommodation Option
-        st.markdown("### 🏨 Accommodation")
-        
-        st.markdown(
-            """
-            I will contact a nearby Permier Inn Millennium Bridge hotel on the Quayside  
-            As you may prefer not to travel on Saturday, you could arrive on Friday night instead. The options are:
-        
-            - **Friday to Sunday:** Max £61.50 per person
-            - **Saturday to Sunday:** Max £37.50 per person
-        
-            I am trying to arrange a group discount so can be cheaper than above.  
-        
-            Please click the nights you’d like me to look into,  
-            or leave both blank if you prefer to arrange your own.
-            """
-        )
-        
-        # Single-choice option
-        accommodation_choice = st.radio(
-            "Select accommodation option:",
-            options=["None","Friday and Saturday night", "Saturday night"],
-            index=0
-        )
-        
-        # Store choice (skip "None")
         accommodation = [] if accommodation_choice == "None" else [accommodation_choice]
             
         st.markdown("### 🍽️ Meal")
@@ -303,6 +277,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
