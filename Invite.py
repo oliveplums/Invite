@@ -172,7 +172,7 @@ if page == "🎉 RSVP":
 
     st.markdown("### 🕐 Timings:")
     st.markdown("""
-    - Arrival/Bar opens: **4:30pm**  
+    - Arrival/Bar opens: **4:00pm**  
     - Dinner begins: **5:30pm**  
     - Ceilidh: **7:30pm**  
     - Bar Close: **11:30pm**  
@@ -277,6 +277,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
