@@ -186,7 +186,7 @@ if page == "🎉 RSVP":
         attending = st.radio("Will you attend?", ["Yes", "No", "Maybe"])
         contribution = st.radio("Can you contribute £30?", ["Yes", "No", "Not sure yet"])
 
-        accommodation = [] if accommodation_choice == "None" else [accommodation_choice]
+        accommodation = [] 
             
         st.markdown("### 🍽️ Meal")
         st.markdown("**TRIMMINGS INCLUDE:** Mashed potato, Yorkshire pudding, seasonal veg, gravy, and more.")
@@ -277,6 +277,7 @@ elif page == "🔐 Host View":
         st.dataframe(rsvps)
         csv = rsvps.to_csv(index=False).encode("utf-8")
         st.download_button("📥 Download CSV", data=csv, file_name="rsvp_data.csv", mime="text/csv")
+
 
 
 
